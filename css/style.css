@@ -8,28 +8,21 @@
  * font family
  */
 
-/**
- * 
- */
-
 /* Mixins */
 
 /**
  * bootstrap
  */
-
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
-
 html {
-  font-family: sans-serif;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -356,6 +349,8 @@ hr {
   cursor: pointer;
 }
 
+/*font*/ 
+
 h1,
 h2,
 h3,
@@ -486,6 +481,7 @@ h6,
 p {
   margin: 0 0 10.5px;
 }
+
 
 .lead {
   margin-bottom: 21px;
@@ -3256,8 +3252,8 @@ body {
 body {
   padding-right: 0 !important;
   font-family: "PingHei","PingFang SC",Helvetica Neue,"Work Sans","Hiragino Sans GB","Microsoft YaHei",SimSun,sans-serif;
-  font-size: 14px;
-  line-height: 1.57143;
+  font-size: 16.5px;
+  line-height: 1.58;
   color: #333333;
   background-color: #fff;
 }
@@ -5868,6 +5864,11 @@ body.no-sidebar .sidebar {
   float: left;
 }
 
+.main .pager > .space {
+  line-height: 32px;
+  float: left;
+}
+
 .main .pager a {
   color: #666;
   border: 0;
@@ -5898,6 +5899,14 @@ body.no-sidebar .sidebar {
 }
 
 .main .pager .page-number + .next {
+  margin-left: 10px;
+}
+
+.main .pager .page-number + .space {
+  margin-left: 10px;
+}
+
+.main .pager .space + .page-number {
   margin-left: 10px;
 }
 
@@ -8591,7 +8600,7 @@ body.okayNav-loaded {
   }
 
   .footer .copyright {
-    display: none;
+    /*display: none;*/
   }
 }
 
