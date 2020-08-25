@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-07-01T03:47:41.603Z</updated>
+  <updated>2020-08-25T06:43:49.427Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,15 +17,26 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>test_my_site</title>
-    <link href="http://yoursite.com/2020/07/01/test-my-site/"/>
-    <id>http://yoursite.com/2020/07/01/test-my-site/</id>
-    <published>2020-07-01T03:47:41.000Z</published>
-    <updated>2020-07-01T03:47:41.603Z</updated>
+    <title>关于如何添加链接工具图标</title>
+    <link href="http://yoursite.com/2020/08/24/help-tooltip/"/>
+    <id>http://yoursite.com/2020/08/24/help-tooltip/</id>
+    <published>2020-08-24T13:45:34.000Z</published>
+    <updated>2020-08-25T06:43:49.427Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>&emsp;本文所写的iconfont添加方案适用于在模板已有自定义字体库的情况下额外添加图形字体。若是此前无其他字体库，可以跳过第二部单独添加，但除临时页面，仍建议使用项目进行图标管理。</p><hr><p><strong>第一步</strong><br>&emsp;登录可以，iconfont（ <a href="https://www.iconfont.cn/" target="_blank" rel="noopener">https://www.iconfont.cn/</a> ）挑选需要的矢量文字图形。将挑选好的图形加入库中（图标像购物车），可以挑选多个。</p><center><img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/1.png" width="600px" /></center><center><img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/2.png" width = "300px"/></center><hr><p><strong>第二步</strong></p><blockquote><p>这一步可以防止unicode重复导致在blog中图形引用错误。</p></blockquote><p>&emsp;点击库（购物车），将图标文件添加到我的项目，如果还没有的话可以点击右上角小图标新建。</p><center class="half"><img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/3.1.png" width = "400px"/></center><p>&emsp;在 资源管理-&gt;我的项目 中找到自己选好的图标，选择编辑图标。</p><center><img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/3.2.png" width = "400px"/></center><p>&emsp;在编辑页面中可以看到图标的unicode和引用名，我们可以对unicode手动进行修改，以免出现与现有文字图库unicode重复造成的问题。</p><center class="half"><img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/3.3.png" width = "600px"/></center><p>&emsp;已经使用的unicode可以在主题的.css文件中查找。打开blog主题文字样式的.css文件,我在这里使用的是基于pure主题修改的主题，样式文件为..\pure\source\css\style.css</p><p>&emsp;可以使用Ctrl+F判断unicode是否被占用，若已经占用了，按照上面说的修改为一个未被占用的，然后点击保存就好了。</p><center class="half"><img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/3.5.png" width = "400px"/></center><hr><p><strong>第三步</strong> </p><p>&emsp;修改完成之后，再次将图标加入库，点击下载到本地。</p><center class="half"><img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/3.png" width = "300px"/></center><p>&emsp;将文件夹解压后，将图中红色箭头所指的5个文件重命名，然后将其复制到主题文字样式文件夹，我的样式中为../source/fonts（增加相同后缀，不与fonts中的文件重名即可）</p><center class="half">    <img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/4.png" width="300"/>    <img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/5.png" width="310"/></center><p>&emsp;打开蓝色箭头所指的iconfont.css文件，将代码复制到主题的文字样式文件.css中，将图中红线所示的url修改为刚刚我们修改（添加后缀）后的文件名。</p><p>&emsp;将图中蓝箭头的font-family名称（新添加的图标）改成与原来的font-family名称一致（黄色箭头），保存。</p><center class="half"><img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/6.png" width = "550px"/></center><hr><p><strong>第四步</strong><br>&emsp;到这一步的话已经添加完成了，可以像调用其他图标一样，在主题样式文件_config.yml中调用了。</p><center class="half"><img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/7.png" width = "550px"/></center>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;&amp;emsp;本文所写的iconfont添加方案适用于在模板已有自定义字体库的情况下额外添加图形字体。若是此前无其他字体库，可以跳过第二部单独</summary>
+      
     
     
     
+    <category term="Hexo_help" scheme="http://yoursite.com/categories/Hexo-help/"/>
     
+    
+    <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
     
   </entry>
   
@@ -34,7 +45,7 @@
     <link href="http://yoursite.com/2020/07/01/hello-world/"/>
     <id>http://yoursite.com/2020/07/01/hello-world/</id>
     <published>2020-07-01T03:34:46.883Z</published>
-    <updated>2020-08-15T16:57:29.124Z</updated>
+    <updated>2020-08-24T13:57:04.192Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p><p>comments: false</p>]]></content>
     
@@ -46,10 +57,12 @@
     
     
     
-    <category term="first time" scheme="http://yoursite.com/categories/first-time/"/>
+    <category term="Hexo_help" scheme="http://yoursite.com/categories/Hexo-help/"/>
     
     
-    <category term="尝试" scheme="http://yoursite.com/tags/%E5%B0%9D%E8%AF%95/"/>
+    <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+    <category term="post" scheme="http://yoursite.com/tags/post/"/>
     
   </entry>
   

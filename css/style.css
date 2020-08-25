@@ -5054,6 +5054,29 @@ table table {
 .modal-small .modal-dialog {
   width: 480px;
 }
+/*新的图标*/
+@font-face {
+    font-family: "icon";
+    src: url('iconfont_b.eot?t=1598291080893'); /* IE9 */
+    src: url('iconfont_b.eot?t=1598291080893#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAANsAAsAAAAAB1gAAAMfAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCCcAqCYII1ATYCJAMICwYABCAFhG0HMhtdBsgekiSQEKE1muKeBYJsxMPT/vjOnTdfRBIy2LhKKnnd8jqF7S7h/Wj39WYhZlERGCSD7/ws5INUFXvVqjoUDdjdwblWHlU6kOFwQ7vN6qPtMdqiDbim/ko8D2iOUWlRiQMctw60w6J4IhvIwHzD2AUt8TiBWoMScEdVDR3gJDPHBeK5KvPglNHKDamhWqisWJq7uAP2qtPrdALgY/D9+A9p4URSUTAzTp9VSlDyK7EiioUSDHgE3nRmsFUUmAcycVlpPWYb+efZqlX9dkbBtlKDX3Fl6XE3+8cjiEpmcj3oh9xr4jn8Sy1IILv23lfA+0F3pGLJ285uatql+3p1aLkOl65X3hXuCvCdLmdnHen8vLPu5qfurbp7dwifH1XXy8vu4uJioHHru9J3+x96Pv0m9974eKSzo4vvdu/RcZW78fC2NsIL79lLuSbcDl23O67u+edX9ebZf34Ur6/sqQs+q+382NBwS04PvlnXADzsthVzKzm3aH6dcyMjXPVLtGpkuIYLcfRY8HR4OxWxWJ7wndXl2+DV/FDD4UCJjbP5UFv+oB+nIWHmfPTBc002n4UO6RHp/D2vgMi41kyoT3cmf1bNDQvwsrOt3+Amv46jT//SQNVyvquZ+YUIJQDlg+xrK/2I37iZC/k/TBb8c6rL4Kc2sBHwu9lB9enagtdelhMByG1cYPpTRkN5IHnF/nZKatWiBORs9XmosuMew6Fax53aqwwkKFQbJ2XaPCrUWUelaruoNad6dZ02lK3INZi1ChCavUfS6AcKzT6SMu0TKnT6hkrNYYta1+G7ZZ3JUF3KKeYZlpAwiVTRZCS2gbmEqW1YHtXzNC0I6F2YWlUXSk1KyYeqsRHTKWZYx+Q0xggi1GRAVeA0rNebkJmaNCyyJIUxc15yMql6UZJoMoCLQxTGYzAJIpiEqEQmRsRrzLgUPt8Gk43S49GGmipnF4yyUvtHUiVJ6UCqlho71dzKJVZjZGkYhkAIysQAqQJmTG/5TRBz9SANJmKSKAO8ZnmSUT3SVZq0vNzwdpuglqlKYcUWqh+petXRAAAA') format('woff2'), url('iconfont.woff?t=1598291080893') format('woff'), url('iconfont.ttf?t=1598291080893') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    url('iconfont.svg?t=1598291080893#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 14px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-bilibili:before {
+    content: "\e62a";
+}
+
+
+/*原来的图标*/
 
 @font-face {
   font-family: "icon";
