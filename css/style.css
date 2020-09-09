@@ -136,13 +136,13 @@ hr {
 pre {
   overflow: auto;
 }
-
+/*代码字体*/
 code,
 kbd,
 pre,
 samp {
-  font-family: monospace,monospace;
-  font-size: 1em;
+    font-family: Consolas,Consolas;
+    font-size: 1em;
 }
 
 button,
@@ -5544,20 +5544,23 @@ pre .js .function {
   color: #8959a8;
 }
 
+/*普通字体颜色，背景色*/
 pre,
 .highlight {
-  background: #fafafa;
-  margin: 10px 0;
-  padding: 15px 10px;
-  overflow: auto;
-  font-size: 13px;
-  color: #4d4d4c;
-  line-height: 1.5;
+    background: #f8f8f8;
+    /*background: #7b90af;*/
+    margin: 10px 0;
+    padding: 15px 10px;
+    overflow: auto;
+    font-size: 14px;
+    color: #1e1e1e;
+    line-height: 1.5;
 }
 
 .highlight .gutter pre,
 .gist .gist-file .gist-data .line-numbers {
   color: #666;
+  Theme: Solarized - Light
 }
 
 code {
@@ -5581,7 +5584,7 @@ pre code {
   padding: 32px 10px 0 10px;
   border-radius: 4px;
 }
-
+/*上边框颜色*/
 .highlight:before {
   display: block;
   content: ' ';
@@ -5590,7 +5593,7 @@ pre code {
   top: 0;
   left: 0;
   right: 0;
-  background-color: #f6f6f6;
+  background-color: #243246;
   padding: 0 10px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
