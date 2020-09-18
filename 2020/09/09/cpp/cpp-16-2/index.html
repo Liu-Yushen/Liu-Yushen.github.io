@@ -18,21 +18,21 @@
   
   
   <title>C++Primer 16章·11-20 | Yushen</title>
-  <meta name="description" content="16.11 List的定义是错误的，应该如何修正？修改后： 123456789101112template &lt;typename elemType&gt; class ListItem;template &lt;typename elemType&gt; class List &amp;#123;public:	List();&#x2F;&#x2F;在List模板内调用List可以省略&lt;&gt;	List(cons">
+  <meta name="description" content="16.11 List的定义是错误的，应该如何修正？ 修改后： 123456789101112template &lt;typename elemType&gt; class ListItem;template &lt;typename elemType&gt; class List &amp;#123;public:	List();&#x2F;&#x2F;在List模板内调用List可以省略&lt;&gt;	List(co">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++Primer 16章·11-20">
-<meta property="og:url" content="http://yoursite.com/2020/09/09/cpp-16-2/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/09/09/cpp/cpp-16-2/index.html">
 <meta property="og:site_name" content="Yushen&#39;s Note">
-<meta property="og:description" content="16.11 List的定义是错误的，应该如何修正？修改后： 123456789101112template &lt;typename elemType&gt; class ListItem;template &lt;typename elemType&gt; class List &amp;#123;public:	List();&#x2F;&#x2F;在List模板内调用List可以省略&lt;&gt;	List(cons">
+<meta property="og:description" content="16.11 List的定义是错误的，应该如何修正？ 修改后： 123456789101112template &lt;typename elemType&gt; class ListItem;template &lt;typename elemType&gt; class List &amp;#123;public:	List();&#x2F;&#x2F;在List模板内调用List可以省略&lt;&gt;	List(co">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-09T01:09:17.000Z">
-<meta property="article:modified_time" content="2020-09-09T04:23:24.735Z">
+<meta property="article:modified_time" content="2020-09-11T12:21:43.048Z">
 <meta property="article:author" content="Yushen_Liu">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="Learning">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://yoursite.com/2020/09/09/cpp-16-2/index.html">
+  <link rel="canonical" href="http://yoursite.com/2020/09/09/cpp/cpp-16-2/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Yushen&#39;s Note" type="application/atom+xml">
   
@@ -56,7 +56,7 @@
       
       
       <div class="profile-block text-center">
-        <a id="avatar" href="../introduction/" target="_blank">
+        <a id="avatar" href="/introduction/" target="_blank">
           <img class="img-circle img-rotate" src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/logo-avator.jpg" width="200" height="200">
         </a>
         <h2 id="name" class="hidden-xs hidden-sm">Liu_Yushen</h2>
@@ -194,7 +194,7 @@
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C-Exercises/">C++Exercises</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo-help/">Hexo_help</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C-Exercises/">C++Exercises</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo-help/">Hexo_help</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesson/">Lesson</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -204,7 +204,7 @@
   <div class="widget">
     <h3 class="widget-title">标签</h3>
     <div class="widget-body">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/" rel="tag">Learning</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Learning/" rel="tag">Learning</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matrix/" rel="tag">Matrix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -214,7 +214,7 @@
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/C/" style="font-size: 14px;">C++</a> <a href="/tags/Learning/" style="font-size: 14px;">Learning</a> <a href="/tags/hexo/" style="font-size: 14px;">hexo</a> <a href="/tags/post/" style="font-size: 13px;">post</a>
+      <a href="/tags/C/" style="font-size: 14px;">C++</a> <a href="/tags/Learning/" style="font-size: 14px;">Learning</a> <a href="/tags/Math/" style="font-size: 13px;">Math</a> <a href="/tags/Matrix/" style="font-size: 13px;">Matrix</a> <a href="/tags/hexo/" style="font-size: 14px;">hexo</a> <a href="/tags/post/" style="font-size: 13px;">post</a>
     </div>
   </div>
 
@@ -223,7 +223,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -238,7 +238,32 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2020/09/09/cpp-16-2/" class="thumb">
+              <a href="/2020/09/18/Lesson/Mix_Unit1/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Lesson/">Lesson</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/09/18/Lesson/Mix_Unit1/" class="title">矩阵论（Updating）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-09-18T06:40:17.000Z" itemprop="datePublished">2020-09-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2020/09/09/cpp/cpp-16-2/" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -252,7 +277,7 @@
                 <a class="category-link" href="/categories/C-Exercises/">C++Exercises</a>
               </p>
               <p class="item-title">
-                <a href="/2020/09/09/cpp-16-2/" class="title">C++Primer 16章·11-20</a>
+                <a href="/2020/09/09/cpp/cpp-16-2/" class="title">C++Primer 16章·11-20</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-09-09T01:09:17.000Z" itemprop="datePublished">2020-09-09</time>
@@ -263,7 +288,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2020/09/08/cpp-16-1/" class="thumb">
+              <a href="/2020/09/08/cpp/cpp-16-1/" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -277,7 +302,7 @@
                 <a class="category-link" href="/categories/C-Exercises/">C++Exercises</a>
               </p>
               <p class="item-title">
-                <a href="/2020/09/08/cpp-16-1/" class="title">C++练习-16章·1-10</a>
+                <a href="/2020/09/08/cpp/cpp-16-1/" class="title">C++练习-16章·1-10</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-09-08T01:09:17.000Z" itemprop="datePublished">2020-09-08</time>
@@ -288,7 +313,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2020/08/24/help-tooltip/" class="thumb">
+              <a href="/2020/08/24/hexo_help/help-tooltip/" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -302,7 +327,7 @@
                 <a class="category-link" href="/categories/Hexo-help/">Hexo_help</a>
               </p>
               <p class="item-title">
-                <a href="/2020/08/24/help-tooltip/" class="title">关于如何添加链接工具图标</a>
+                <a href="/2020/08/24/hexo_help/help-tooltip/" class="title">关于如何添加链接工具图标</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-08-24T13:45:34.000Z" itemprop="datePublished">2020-08-24</time>
@@ -313,7 +338,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2020/07/01/hello-world/" class="thumb">
+              <a href="/2020/07/01/hexo_help/hello-world/" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -327,7 +352,7 @@
                 <a class="category-link" href="/categories/Hexo-help/">Hexo_help</a>
               </p>
               <p class="item-title">
-                <a href="/2020/07/01/hello-world/" class="title">Hello World</a>
+                <a href="/2020/07/01/hexo_help/hello-world/" class="title">Hello World</a>
               </p>
               <p class="item-date">
                 <time datetime="2020-07-01T03:34:46.883Z" itemprop="datePublished">2020-07-01</time>
@@ -348,7 +373,7 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-cpp-16-2" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-cpp/cpp-16-2" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
@@ -363,7 +388,7 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/09/09/cpp-16-2/" class="article-date">
+	<a href="/2020/09/09/cpp/cpp-16-2/" class="article-date">
 	  <time datetime="2020-09-09T01:09:17.000Z" itemprop="datePublished">2020-09-09</time>
 	</a>
 </span>
@@ -389,36 +414,29 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/09/09/cpp-16-2/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/09/09/cpp/cpp-16-2/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h4 id="16-11-List的定义是错误的，应该如何修正？"><a href="#16-11-List的定义是错误的，应该如何修正？" class="headerlink" title="16.11 List的定义是错误的，应该如何修正？"></a>16.11 List的定义是错误的，应该如何修正？</h4><p>修改后：</p>
+        <h4 id="1611-list的定义是错误的应该如何修正"><a class="markdownIt-Anchor" href="#1611-list的定义是错误的应该如何修正"></a> 16.11 List的定义是错误的，应该如何修正？</h4>
+<p>修改后：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> elemType&gt; <span class="class"><span class="keyword">class</span> <span class="title">ListItem</span>;</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> elemType&gt; <span class="class"><span class="keyword">class</span> <span class="title">List</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	List();<span class="comment">//在List模板内调用List可以省略&lt;&gt;</span></span><br><span class="line">	List(<span class="keyword">const</span> List&lt;elemType&gt; &amp;);</span><br><span class="line">	List&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> List&lt;elemType&gt;&amp;);</span><br><span class="line">	~List();</span><br><span class="line">	<span class="comment">//ListItem在模板类定义外调用需要加上&lt;&gt;</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(ListItem&lt;elemType&gt;* ptr, elemType value)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	ListItem * front, * <span class="built_in">end</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h4 id="16-12-编写你自己版本的Blob和BlobPtr，包含书中未定义的多个const"><a href="#16-12-编写你自己版本的Blob和BlobPtr，包含书中未定义的多个const" class="headerlink" title="16.12 编写你自己版本的Blob和BlobPtr，包含书中未定义的多个const"></a>16.12 编写你自己版本的Blob和BlobPtr，包含书中未定义的多个const</h4><blockquote>
+<h4 id="1612-编写你自己版本的blob和blobptr包含书中未定义的多个const"><a class="markdownIt-Anchor" href="#1612-编写你自己版本的blob和blobptr包含书中未定义的多个const"></a> 16.12 编写你自己版本的Blob和BlobPtr，包含书中未定义的多个const</h4>
+<blockquote>
 <p>这道题涉及到新学的<strong>模板类的定义</strong>和<strong>模板友元的声明</strong>以及之前学到的<strong>const类型函数</strong>、<strong>智能指针</strong>、<strong>运算符重载</strong>等内容。如果跟我一样战线拉得比较长得同学可以试着重写以下这个Blob。如果之前学得比较好的话，可以直接从<strong>12章-19题</strong>的<code>Strbol.h</code>改成<code>template</code>模板熟悉一下模板的声明。程序如下：</p>
 </blockquote>
 <p>blob.h</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> BLOB_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BLOB_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;initializer_list&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> t&gt; <span class="class"><span class="keyword">class</span> <span class="title">blobptr</span>;</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> blobptr&lt;T&gt;&amp;, <span class="keyword">const</span> blobptr&lt;T&gt;&amp;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">blob</span> &#123;</span></span><br><span class="line">	<span class="keyword">friend</span> <span class="class"><span class="keyword">class</span> <span class="title">blobptr</span>&lt;T&gt;;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	blob();</span><br><span class="line">	blob(<span class="built_in">initializer_list</span>&lt;T&gt; il);<span class="comment">//接受&#123;&#125;列表初始化</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="built_in">string</span>::size_type <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> data-&gt;<span class="built_in">size</span>(); &#125;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> data-&gt;empty(); &#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">push_back</span><span class="params">(<span class="keyword">const</span> T&amp; t)</span> </span>&#123; data-&gt;push_back(t); &#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">push_back</span><span class="params">(<span class="keyword">const</span> T&amp;&amp; t)</span> </span>&#123; data-&gt;push_back(t); &#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">pop_back</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function">T&amp; <span class="title">front</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">const</span> T&amp; <span class="title">front</span><span class="params">()</span><span class="keyword">const</span></span>;</span><br><span class="line">	<span class="function">T&amp; <span class="title">back</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">const</span> T&amp; <span class="title">back</span><span class="params">()</span><span class="keyword">const</span></span>;</span><br><span class="line">	T&amp; <span class="keyword">operator</span>[](<span class="built_in">string</span>::size_type i);</span><br><span class="line">	<span class="keyword">const</span> T&amp; <span class="keyword">operator</span>[](<span class="built_in">string</span>::size_type i) <span class="keyword">const</span>;</span><br><span class="line">	<span class="comment">//与书上不同，改为了const版本，</span></span><br><span class="line">	<span class="comment">//同时blobptr构造函数的接受参数也要改为const版本的引用</span></span><br><span class="line">	<span class="function">blobptr&lt;T&gt; <span class="title">begin</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span>  blobptr&lt;T&gt;(*<span class="keyword">this</span>);&#125;</span><br><span class="line">	<span class="function">blobptr&lt;T&gt; <span class="title">end</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> blobptr&lt;T&gt;(*<span class="keyword">this</span>,data-&gt;<span class="built_in">size</span>());&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">shared_ptr</span>&lt;<span class="built_in">vector</span>&lt;T&gt;&gt; data;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">check</span><span class="params">(<span class="built_in">string</span>::size_type i,<span class="keyword">const</span> <span class="built_in">string</span>&amp; s)</span><span class="keyword">const</span></span>;<span class="comment">//检查溢出</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; blob&lt;T&gt;::blob() : data(make_shared&lt;<span class="built_in">vector</span>&lt;T&gt;&gt;())&#123;&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; blob&lt;T&gt;::blob(<span class="built_in">initializer_list</span>&lt;T&gt; il): </span><br><span class="line">	data(make_shared&lt;<span class="built_in">vector</span>&lt;T&gt;&gt;(il))&#123;&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">void</span> blob&lt;T&gt;::pop_back() &#123;</span><br><span class="line">	check(<span class="number">0</span>, <span class="string">"no elem here"</span>);</span><br><span class="line">	<span class="keyword">return</span> data-&gt;pop_back();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; T&amp; blob&lt;T&gt;::back() &#123;</span><br><span class="line">	check(<span class="number">0</span>, <span class="string">"no elem here"</span>);</span><br><span class="line">	<span class="keyword">return</span> data-&gt;back();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">const</span> T&amp; blob&lt;T&gt;::back()<span class="keyword">const</span> &#123;</span><br><span class="line">	check(<span class="number">0</span>, <span class="string">"no elem here"</span>);</span><br><span class="line">	<span class="keyword">return</span> data-&gt;back();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; T&amp; blob&lt;T&gt;::front() &#123;</span><br><span class="line">	check(<span class="number">0</span>, <span class="string">"no elem here"</span>);</span><br><span class="line">	<span class="keyword">return</span> data-&gt;front();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">const</span> T&amp; blob&lt;T&gt;::front()<span class="keyword">const</span> &#123;</span><br><span class="line">	check(<span class="number">0</span>, <span class="string">"no elem here"</span>);</span><br><span class="line">	<span class="keyword">return</span> data-&gt;front();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; T&amp; blob&lt;T&gt;::<span class="keyword">operator</span>[](<span class="built_in">string</span>::size_type i) &#123;</span><br><span class="line">	check(i, <span class="string">"out of range"</span>);</span><br><span class="line">	<span class="keyword">return</span> (*data)[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">const</span> T&amp; blob&lt;T&gt;::<span class="keyword">operator</span>[](<span class="built_in">string</span>::size_type i)<span class="keyword">const</span> &#123;</span><br><span class="line">	check(i, <span class="string">"out of range"</span>);</span><br><span class="line">	<span class="keyword">return</span> (*data)[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </span><br><span class="line"><span class="keyword">void</span> blob&lt;T&gt;::check(<span class="built_in">string</span>::size_type i, <span class="keyword">const</span> <span class="built_in">string</span>&amp; s)<span class="keyword">const</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (i &gt;= data-&gt;<span class="built_in">size</span>())</span><br><span class="line">		<span class="keyword">throw</span> out_of_range(s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//blobptr相当于一个blob的迭代器</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> t&gt; <span class="class"><span class="keyword">class</span> <span class="title">blobptr</span> &#123;</span></span><br><span class="line">	<span class="keyword">friend</span> <span class="keyword">bool</span> <span class="keyword">operator</span>==&lt;t&gt;(<span class="keyword">const</span> blobptr&lt;t&gt;&amp; lhr, <span class="keyword">const</span> blobptr&lt;t&gt;&amp; rhr);</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	blobptr():curr(<span class="number">0</span>)&#123;&#125;</span><br><span class="line">	blobptr( <span class="keyword">const</span> blob&lt;t&gt; &amp;pb ,<span class="keyword">const</span> <span class="keyword">size_t</span> sz = <span class="number">0</span>):wptr(pb.data),curr(sz)&#123;&#125;</span><br><span class="line">	t &amp; <span class="keyword">operator</span>*() <span class="keyword">const</span>;</span><br><span class="line">	blobptr &amp; <span class="keyword">operator</span>++();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="function"><span class="built_in">shared_ptr</span>&lt;<span class="built_in">vector</span>&lt;t&gt;&gt;  <span class="title">check</span><span class="params">(<span class="keyword">const</span> <span class="keyword">size_t</span> sz,<span class="built_in">string</span> msg)</span> <span class="keyword">const</span></span>;</span><br><span class="line">	weak_ptr&lt;<span class="built_in">vector</span>&lt;t&gt;&gt; wptr;</span><br><span class="line">	<span class="keyword">size_t</span> curr;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> t&gt;</span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="built_in">vector</span>&lt;t&gt;&gt; blobptr&lt;t&gt;::check(<span class="keyword">const</span> <span class="keyword">size_t</span> sz,<span class="built_in">string</span> msg)<span class="keyword">const</span> &#123;</span><br><span class="line">	<span class="keyword">auto</span> ret = wptr.lock();</span><br><span class="line">	<span class="keyword">if</span>(!ret)</span><br><span class="line">		<span class="keyword">throw</span> runtime_error(<span class="string">"unbond"</span>);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(sz &gt;= ret-&gt;<span class="built_in">size</span>())</span><br><span class="line">		<span class="keyword">throw</span> out_of_range(msg);</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> t&gt;</span><br><span class="line">t &amp; blobptr&lt;t&gt;::<span class="keyword">operator</span>*()<span class="keyword">const</span>&#123;</span><br><span class="line">	<span class="keyword">auto</span> pb = check(curr,<span class="string">"out of range"</span>);</span><br><span class="line">	<span class="keyword">return</span> (*pb)[curr];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> t&gt;</span><br><span class="line">blobptr&lt;t&gt; &amp; blobptr&lt;t&gt;::<span class="keyword">operator</span>++()&#123;</span><br><span class="line">	check(curr,<span class="string">"the end"</span>);</span><br><span class="line">	++curr;</span><br><span class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; </span><br><span class="line"><span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> blobptr&lt;T&gt;&amp; lhr, <span class="keyword">const</span> blobptr&lt;T&gt;&amp; rhr) &#123;</span><br><span class="line">	<span class="keyword">return</span> (lhr.curr == rhr.curr );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !BLOB_H</span></span></span><br></pre></td></tr></table></figure>
-
 <p>main.cpp</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"blob.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//测试 blob 功能(int)</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"普通版本功能测试"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	blob&lt;<span class="keyword">int</span>&gt; a = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>&#125;;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; a.back() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; a[<span class="number">2</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//测试  blobptr 功能(string)</span></span><br><span class="line">	blob&lt;<span class="built_in">string</span>&gt; b = &#123; <span class="string">"abc"</span>,<span class="string">"def"</span>,<span class="string">"ghi"</span>,<span class="string">"jkl"</span> &#125;;</span><br><span class="line">	<span class="function">blobptr&lt;<span class="built_in">string</span>&gt; <span class="title">ib2</span><span class="params">(b, <span class="number">2</span>)</span></span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; *ib2 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">auto</span> ib = b.<span class="built_in">begin</span>();<span class="comment">//合成版本拷贝</span></span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt; *ib &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt; *(++ib) &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//检测const版本</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"const版本功能测试"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">const</span> blob&lt;<span class="keyword">int</span>&gt; ca = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span> &#125;;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; ca.back() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; ca[<span class="number">2</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">const</span> blob&lt;<span class="built_in">string</span>&gt; cb = &#123; <span class="string">"abc"</span>,<span class="string">"def"</span>,<span class="string">"ghi"</span>,<span class="string">"jkl"</span> &#125;;</span><br><span class="line">	<span class="keyword">auto</span> icb = cb.<span class="built_in">begin</span>();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; *icb &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
       
     </div>
     <div class="article-footer">
       <blockquote class="mt-2x">
   <ul class="post-copyright list-unstyled">
-    
-    <li class="post-copyright-link hidden-xs">
-      <strong>本文链接：</strong>
-      <a href="http://yoursite.com/2020/09/09/cpp-16-2/" title="C++Primer 16章·11-20" target="_blank" rel="external">http://yoursite.com/2020/09/09/cpp-16-2/</a>
-    </li>
-    
+
     <li class="post-copyright-license">
       <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
     </li>
@@ -430,12 +448,12 @@
   <div class="panel-body">
     <figure class="media">
       <div class="media-left">
-        <a href="../introduction/" target="_blank" class="img-burn thumb-sm visible-lg">
+        <a href="/introduction/" target="_blank" class="img-burn thumb-sm visible-lg">
           <img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/logo-avator.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
       <div class="media-body">
-        <h3 class="media-heading"><a href="../introduction/" target="_blank"><span class="text-dark">Liu_Yushen</span><small class="ml-1x">Engineer</small></a></h3>
+        <h3 class="media-heading"><a href="/introduction/" target="_blank"><span class="text-dark">Liu_Yushen</span><small class="ml-1x">Engineer</small></a></h3>
         <div>个人简介。</div>
       </div>
     </figure>
@@ -462,9 +480,13 @@
   
   <ul class="pager pull-left">
     
+    <li class="prev">
+      <a href="/2020/09/18/Lesson/Mix_Unit1/" title="矩阵论（Updating）"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
     
     <li class="next">
-      <a href="/2020/09/08/cpp-16-1/" title="C++练习-16章·1-10"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2020/09/08/cpp/cpp-16-1/" title="C++练习-16章·1-10"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     

@@ -2,28 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2020/09/08/cpp-16-1/</loc>
+    <loc>http://yoursite.com/2020/09/18/Lesson/Mix_Unit1/</loc>
+    
+    <lastmod>2020-09-18</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/09/09/cpp/cpp-16-2/</loc>
+    
+    <lastmod>2020-09-11</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/09/08/cpp/cpp-16-1/</loc>
     
     <lastmod>2020-09-09</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/09/09/cpp-16-2/</loc>
-    
-    <lastmod>2020-09-09</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/08/24/help-tooltip/</loc>
+    <loc>http://yoursite.com/2020/08/24/hexo_help/help-tooltip/</loc>
     
     <lastmod>2020-08-25</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/07/01/hello-world/</loc>
+    <loc>http://yoursite.com/2020/07/01/hexo_help/hello-world/</loc>
     
     <lastmod>2020-08-24</lastmod>
     
@@ -74,7 +81,7 @@
 
   <url>
     <loc>http://yoursite.com/</loc>
-    <lastmod>2020-09-09</lastmod>
+    <lastmod>2020-09-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -82,28 +89,42 @@
   
   <url>
     <loc>http://yoursite.com/tags/hexo/</loc>
-    <lastmod>2020-09-09</lastmod>
+    <lastmod>2020-09-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/post/</loc>
-    <lastmod>2020-09-09</lastmod>
+    <lastmod>2020-09-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/C/</loc>
-    <lastmod>2020-09-09</lastmod>
+    <lastmod>2020-09-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/Learning/</loc>
-    <lastmod>2020-09-09</lastmod>
+    <lastmod>2020-09-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/Math/</loc>
+    <lastmod>2020-09-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/Matrix/</loc>
+    <lastmod>2020-09-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -112,14 +133,21 @@
   
   <url>
     <loc>http://yoursite.com/categories/Hexo-help/</loc>
-    <lastmod>2020-09-09</lastmod>
+    <lastmod>2020-09-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/C-Exercises/</loc>
-    <lastmod>2020-09-09</lastmod>
+    <lastmod>2020-09-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/Lesson/</loc>
+    <lastmod>2020-09-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
