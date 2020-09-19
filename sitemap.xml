@@ -4,7 +4,7 @@
   <url>
     <loc>http://yoursite.com/2020/09/18/Lesson/Mix_Unit1/</loc>
     
-    <lastmod>2020-09-18</lastmod>
+    <lastmod>2020-09-19</lastmod>
     
   </url>
   
@@ -81,7 +81,7 @@
 
   <url>
     <loc>http://yoursite.com/</loc>
-    <lastmod>2020-09-18</lastmod>
+    <lastmod>2020-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -89,42 +89,42 @@
   
   <url>
     <loc>http://yoursite.com/tags/hexo/</loc>
-    <lastmod>2020-09-18</lastmod>
+    <lastmod>2020-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/post/</loc>
-    <lastmod>2020-09-18</lastmod>
+    <lastmod>2020-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/C/</loc>
-    <lastmod>2020-09-18</lastmod>
+    <lastmod>2020-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/Learning/</loc>
-    <lastmod>2020-09-18</lastmod>
+    <lastmod>2020-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/Math/</loc>
-    <lastmod>2020-09-18</lastmod>
+    <lastmod>2020-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/Matrix/</loc>
-    <lastmod>2020-09-18</lastmod>
+    <lastmod>2020-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -133,21 +133,21 @@
   
   <url>
     <loc>http://yoursite.com/categories/Hexo-help/</loc>
-    <lastmod>2020-09-18</lastmod>
+    <lastmod>2020-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/C-Exercises/</loc>
-    <lastmod>2020-09-18</lastmod>
+    <lastmod>2020-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/Lesson/</loc>
-    <lastmod>2020-09-18</lastmod>
+    <lastmod>2020-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
