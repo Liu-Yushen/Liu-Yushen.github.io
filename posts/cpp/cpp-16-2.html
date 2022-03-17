@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>C++Primer 16章·11-20 | Yushen</title>
+  <meta name="description" content="16.11 List的定义是错误的，应该如何修正？修改后： 123456789101112template &lt;typename elemType&gt; class ListItem;template &lt;typename elemType&gt; class List &amp;#123;public:	List();&#x2F;&#x2F;在List模板内调用List可以省略&lt;&gt;	List(cons">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++Primer 16章·11-20">
+<meta property="og:url" content="http://yoursite.com/posts/cpp/cpp-16-2.html">
+<meta property="og:site_name" content="Yushen&#39;s Note">
+<meta property="og:description" content="16.11 List的定义是错误的，应该如何修正？修改后： 123456789101112template &lt;typename elemType&gt; class ListItem;template &lt;typename elemType&gt; class List &amp;#123;public:	List();&#x2F;&#x2F;在List模板内调用List可以省略&lt;&gt;	List(cons">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-09T01:09:17.000Z">
+<meta property="article:modified_time" content="2022-03-17T10:01:46.787Z">
+<meta property="article:author" content="Yushen_L">
+<meta property="article:tag" content="Cpp">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/posts/cpp/cpp-16-2.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Yushen&#39;s Note" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="/introduction/" target="_blank">
+          <img class="img-circle img-rotate" src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/logo-avator.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Liu_Yushen</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Engineer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Liu-Yushen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://space.bilibili.com/123821855" target="_blank" title="Bilibili" data-toggle=tooltip data-placement=top><i class="icon icon-bilibili"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">前言</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>本站内容均为学习笔记，欢迎交流指正，分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AMEsim/">AMEsim</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Sport/">Sport</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">信号处理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">数据处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BE%E5%A4%96%E9%98%85%E8%AF%BB/">课外阅读</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cpp/" rel="tag">Cpp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Databased/" rel="tag">Databased</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matlab/" rel="tag">Matlab</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%BF%E7%9C%9F/" rel="tag">仿真</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" rel="tag">信号处理</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E5%8A%A8/" rel="tag">运动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%87%91%E8%9E%8D/" rel="tag">金融</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Cpp/" style="font-size: 13.25px;">Cpp</a> <a href="/tags/Databased/" style="font-size: 14px;">Databased</a> <a href="/tags/MYSQL/" style="font-size: 14px;">MYSQL</a> <a href="/tags/Matlab/" style="font-size: 13.75px;">Matlab</a> <a href="/tags/hexo/" style="font-size: 13.25px;">hexo</a> <a href="/tags/post/" style="font-size: 13px;">post</a> <a href="/tags/%E4%BB%BF%E7%9C%9F/" style="font-size: 13px;">仿真</a> <a href="/tags/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" style="font-size: 13.5px;">信号处理</a> <a href="/tags/%E8%BF%90%E5%8A%A8/" style="font-size: 13px;">运动</a> <a href="/tags/%E9%87%91%E8%9E%8D/" style="font-size: 13px;">金融</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/simulation/AmeSim_solver.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/AMEsim/">AMEsim</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/simulation/AmeSim_solver.html" class="title">AmeSim学习笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-02-28T08:30:20.000Z" itemprop="datePublished">2022-02-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/database/view.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/database/view.html" class="title">TCL-视图</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-07T13:43:17.000Z" itemprop="datePublished">2022-01-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/database/TCL_.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/database/TCL_.html" class="title">TCL-事务管理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-07T12:48:17.000Z" itemprop="datePublished">2022-01-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/database/DDL_constraint.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/database/DDL_constraint.html" class="title">DDL-约束介绍</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-07T08:00:17.000Z" itemprop="datePublished">2022-01-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/database/DML_add.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/database/DML_add.html" class="title">DML-管理数据（记录）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-06T15:00:00.000Z" itemprop="datePublished">2022-01-06</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-cpp/cpp-16-2" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C++Primer 16章·11-20
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/posts/cpp/cpp-16-2.html" class="article-date">
+	  <time datetime="2020-09-09T01:09:17.000Z" itemprop="datePublished">2020-09-09</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Cpp/">Cpp</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Cpp/" rel="tag">Cpp</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/posts/cpp/cpp-16-2.html#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h4 id="16-11-List的定义是错误的，应该如何修正？"><a href="#16-11-List的定义是错误的，应该如何修正？" class="headerlink" title="16.11 List的定义是错误的，应该如何修正？"></a>16.11 List的定义是错误的，应该如何修正？</h4><p>修改后：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> elemType&gt; <span class="class"><span class="keyword">class</span> <span class="title">ListItem</span>;</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> elemType&gt; <span class="class"><span class="keyword">class</span> <span class="title">List</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	List();<span class="comment">//在List模板内调用List可以省略&lt;&gt;</span></span><br><span class="line">	List(<span class="keyword">const</span> List&lt;elemType&gt; &amp;);</span><br><span class="line">	List&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> List&lt;elemType&gt;&amp;);</span><br><span class="line">	~List();</span><br><span class="line">	<span class="comment">//ListItem在模板类定义外调用需要加上&lt;&gt;</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(ListItem&lt;elemType&gt;* ptr, elemType value)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	ListItem * front, * <span class="built_in">end</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="16-12-编写你自己版本的Blob和BlobPtr，包含书中未定义的多个const"><a href="#16-12-编写你自己版本的Blob和BlobPtr，包含书中未定义的多个const" class="headerlink" title="16.12 编写你自己版本的Blob和BlobPtr，包含书中未定义的多个const"></a>16.12 编写你自己版本的Blob和BlobPtr，包含书中未定义的多个const</h4><blockquote>
+<p>这道题涉及到新学的<strong>模板类的定义</strong>和<strong>模板友元的声明</strong>以及之前学到的<strong>const类型函数</strong>、<strong>智能指针</strong>、<strong>运算符重载</strong>等内容。如果跟我一样战线拉得比较长得同学可以试着重写以下这个Blob。如果之前学得比较好的话，可以直接从<strong>12章-19题</strong>的<code>Strbol.h</code>改成<code>template</code>模板熟悉一下模板的声明。程序如下：</p>
+</blockquote>
+<p>blob.h</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> BLOB_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BLOB_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;initializer_list&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> t&gt; <span class="class"><span class="keyword">class</span> <span class="title">blobptr</span>;</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> blobptr&lt;T&gt;&amp;, <span class="keyword">const</span> blobptr&lt;T&gt;&amp;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">blob</span> &#123;</span></span><br><span class="line">	<span class="keyword">friend</span> <span class="class"><span class="keyword">class</span> <span class="title">blobptr</span>&lt;T&gt;;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	blob();</span><br><span class="line">	blob(<span class="built_in">initializer_list</span>&lt;T&gt; il);<span class="comment">//接受&#123;&#125;列表初始化</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="built_in">string</span>::size_type <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> data-&gt;<span class="built_in">size</span>(); &#125;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> data-&gt;empty(); &#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">push_back</span><span class="params">(<span class="keyword">const</span> T&amp; t)</span> </span>&#123; data-&gt;push_back(t); &#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">push_back</span><span class="params">(<span class="keyword">const</span> T&amp;&amp; t)</span> </span>&#123; data-&gt;push_back(t); &#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">pop_back</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function">T&amp; <span class="title">front</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">const</span> T&amp; <span class="title">front</span><span class="params">()</span><span class="keyword">const</span></span>;</span><br><span class="line">	<span class="function">T&amp; <span class="title">back</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">const</span> T&amp; <span class="title">back</span><span class="params">()</span><span class="keyword">const</span></span>;</span><br><span class="line">	T&amp; <span class="keyword">operator</span>[](<span class="built_in">string</span>::size_type i);</span><br><span class="line">	<span class="keyword">const</span> T&amp; <span class="keyword">operator</span>[](<span class="built_in">string</span>::size_type i) <span class="keyword">const</span>;</span><br><span class="line">	<span class="comment">//与书上不同，改为了const版本，</span></span><br><span class="line">	<span class="comment">//同时blobptr构造函数的接受参数也要改为const版本的引用</span></span><br><span class="line">	<span class="function">blobptr&lt;T&gt; <span class="title">begin</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span>  blobptr&lt;T&gt;(*<span class="keyword">this</span>);&#125;</span><br><span class="line">	<span class="function">blobptr&lt;T&gt; <span class="title">end</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> blobptr&lt;T&gt;(*<span class="keyword">this</span>,data-&gt;<span class="built_in">size</span>());&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">shared_ptr</span>&lt;<span class="built_in">vector</span>&lt;T&gt;&gt; data;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">check</span><span class="params">(<span class="built_in">string</span>::size_type i,<span class="keyword">const</span> <span class="built_in">string</span>&amp; s)</span><span class="keyword">const</span></span>;<span class="comment">//检查溢出</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; blob&lt;T&gt;::blob() : data(make_shared&lt;<span class="built_in">vector</span>&lt;T&gt;&gt;())&#123;&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; blob&lt;T&gt;::blob(<span class="built_in">initializer_list</span>&lt;T&gt; il): </span><br><span class="line">	data(make_shared&lt;<span class="built_in">vector</span>&lt;T&gt;&gt;(il))&#123;&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">void</span> blob&lt;T&gt;::pop_back() &#123;</span><br><span class="line">	check(<span class="number">0</span>, <span class="string">"no elem here"</span>);</span><br><span class="line">	<span class="keyword">return</span> data-&gt;pop_back();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; T&amp; blob&lt;T&gt;::back() &#123;</span><br><span class="line">	check(<span class="number">0</span>, <span class="string">"no elem here"</span>);</span><br><span class="line">	<span class="keyword">return</span> data-&gt;back();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">const</span> T&amp; blob&lt;T&gt;::back()<span class="keyword">const</span> &#123;</span><br><span class="line">	check(<span class="number">0</span>, <span class="string">"no elem here"</span>);</span><br><span class="line">	<span class="keyword">return</span> data-&gt;back();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; T&amp; blob&lt;T&gt;::front() &#123;</span><br><span class="line">	check(<span class="number">0</span>, <span class="string">"no elem here"</span>);</span><br><span class="line">	<span class="keyword">return</span> data-&gt;front();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">const</span> T&amp; blob&lt;T&gt;::front()<span class="keyword">const</span> &#123;</span><br><span class="line">	check(<span class="number">0</span>, <span class="string">"no elem here"</span>);</span><br><span class="line">	<span class="keyword">return</span> data-&gt;front();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; T&amp; blob&lt;T&gt;::<span class="keyword">operator</span>[](<span class="built_in">string</span>::size_type i) &#123;</span><br><span class="line">	check(i, <span class="string">"out of range"</span>);</span><br><span class="line">	<span class="keyword">return</span> (*data)[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">const</span> T&amp; blob&lt;T&gt;::<span class="keyword">operator</span>[](<span class="built_in">string</span>::size_type i)<span class="keyword">const</span> &#123;</span><br><span class="line">	check(i, <span class="string">"out of range"</span>);</span><br><span class="line">	<span class="keyword">return</span> (*data)[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </span><br><span class="line"><span class="keyword">void</span> blob&lt;T&gt;::check(<span class="built_in">string</span>::size_type i, <span class="keyword">const</span> <span class="built_in">string</span>&amp; s)<span class="keyword">const</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (i &gt;= data-&gt;<span class="built_in">size</span>())</span><br><span class="line">		<span class="keyword">throw</span> out_of_range(s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//blobptr相当于一个blob的迭代器</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> t&gt; <span class="class"><span class="keyword">class</span> <span class="title">blobptr</span> &#123;</span></span><br><span class="line">	<span class="keyword">friend</span> <span class="keyword">bool</span> <span class="keyword">operator</span>==&lt;t&gt;(<span class="keyword">const</span> blobptr&lt;t&gt;&amp; lhr, <span class="keyword">const</span> blobptr&lt;t&gt;&amp; rhr);</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	blobptr():curr(<span class="number">0</span>)&#123;&#125;</span><br><span class="line">	blobptr( <span class="keyword">const</span> blob&lt;t&gt; &amp;pb ,<span class="keyword">const</span> <span class="keyword">size_t</span> sz = <span class="number">0</span>):wptr(pb.data),curr(sz)&#123;&#125;</span><br><span class="line">	t &amp; <span class="keyword">operator</span>*() <span class="keyword">const</span>;</span><br><span class="line">	blobptr &amp; <span class="keyword">operator</span>++();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="function"><span class="built_in">shared_ptr</span>&lt;<span class="built_in">vector</span>&lt;t&gt;&gt;  <span class="title">check</span><span class="params">(<span class="keyword">const</span> <span class="keyword">size_t</span> sz,<span class="built_in">string</span> msg)</span> <span class="keyword">const</span></span>;</span><br><span class="line">	weak_ptr&lt;<span class="built_in">vector</span>&lt;t&gt;&gt; wptr;</span><br><span class="line">	<span class="keyword">size_t</span> curr;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> t&gt;</span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="built_in">vector</span>&lt;t&gt;&gt; blobptr&lt;t&gt;::check(<span class="keyword">const</span> <span class="keyword">size_t</span> sz,<span class="built_in">string</span> msg)<span class="keyword">const</span> &#123;</span><br><span class="line">	<span class="keyword">auto</span> ret = wptr.lock();</span><br><span class="line">	<span class="keyword">if</span>(!ret)</span><br><span class="line">		<span class="keyword">throw</span> runtime_error(<span class="string">"unbond"</span>);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(sz &gt;= ret-&gt;<span class="built_in">size</span>())</span><br><span class="line">		<span class="keyword">throw</span> out_of_range(msg);</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> t&gt;</span><br><span class="line">t &amp; blobptr&lt;t&gt;::<span class="keyword">operator</span>*()<span class="keyword">const</span>&#123;</span><br><span class="line">	<span class="keyword">auto</span> pb = check(curr,<span class="string">"out of range"</span>);</span><br><span class="line">	<span class="keyword">return</span> (*pb)[curr];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> t&gt;</span><br><span class="line">blobptr&lt;t&gt; &amp; blobptr&lt;t&gt;::<span class="keyword">operator</span>++()&#123;</span><br><span class="line">	check(curr,<span class="string">"the end"</span>);</span><br><span class="line">	++curr;</span><br><span class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; </span><br><span class="line"><span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> blobptr&lt;T&gt;&amp; lhr, <span class="keyword">const</span> blobptr&lt;T&gt;&amp; rhr) &#123;</span><br><span class="line">	<span class="keyword">return</span> (lhr.curr == rhr.curr );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !BLOB_H</span></span></span><br></pre></td></tr></table></figure>
+<p>main.cpp</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"blob.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//测试 blob 功能(int)</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"普通版本功能测试"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	blob&lt;<span class="keyword">int</span>&gt; a = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>&#125;;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; a.back() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; a[<span class="number">2</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//测试  blobptr 功能(string)</span></span><br><span class="line">	blob&lt;<span class="built_in">string</span>&gt; b = &#123; <span class="string">"abc"</span>,<span class="string">"def"</span>,<span class="string">"ghi"</span>,<span class="string">"jkl"</span> &#125;;</span><br><span class="line">	<span class="function">blobptr&lt;<span class="built_in">string</span>&gt; <span class="title">ib2</span><span class="params">(b, <span class="number">2</span>)</span></span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; *ib2 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">auto</span> ib = b.<span class="built_in">begin</span>();<span class="comment">//合成版本拷贝</span></span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt; *ib &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt; *(++ib) &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//检测const版本</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"const版本功能测试"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">const</span> blob&lt;<span class="keyword">int</span>&gt; ca = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span> &#125;;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; ca.back() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; ca[<span class="number">2</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">const</span> blob&lt;<span class="built_in">string</span>&gt; cb = &#123; <span class="string">"abc"</span>,<span class="string">"def"</span>,<span class="string">"ghi"</span>,<span class="string">"jkl"</span> &#125;;</span><br><span class="line">	<span class="keyword">auto</span> icb = cb.<span class="built_in">begin</span>();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; *icb &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="/introduction/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/logo-avator.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="/introduction/" target="_blank"><span class="text-dark">Liu_Yushen</span><small class="ml-1x">Engineer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/posts/matlab/Matlabfile_IO.html" title="Matlab数据文件读/写"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/posts/cpp/cpp-16-1.html" title="C++练习-16章·1-10"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Liu-Yushen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://space.bilibili.com/123821855" target="_blank" title="Bilibili" data-toggle=tooltip data-placement=top><i class="icon icon-bilibili"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2022 Yushen_L
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: true,
+    appId: 'JtEi77W9irt2uC5ebtRpOJB5-gzGzoHsz',
+    appKey: 'UEtSjUe18cyvpt5FLjobTkyM',
+    placeholder: '评价一下？',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

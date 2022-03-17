@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Start-数据库系统（目录） | Yushen</title>
+  <meta name="description" content="软件（MYSQL） 安装、启动及登录 —— MySQL安装 图形化界面使用 常见指令   SQL语言—DQL查询语法 (Data Query Language) 基础查询——&gt;详情  列表查询 列表别名  使用语法： 12Select QuerylistFrom Tablename; #非必要行，指定查询位置    条件查询——&gt;详情  条件表达式 逻辑表达式  使用语法： 12345">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Start-数据库系统（目录）">
+<meta property="og:url" content="http://yoursite.com/posts/database/database_index.html">
+<meta property="og:site_name" content="Yushen&#39;s Note">
+<meta property="og:description" content="软件（MYSQL） 安装、启动及登录 —— MySQL安装 图形化界面使用 常见指令   SQL语言—DQL查询语法 (Data Query Language) 基础查询——&gt;详情  列表查询 列表别名  使用语法： 12Select QuerylistFrom Tablename; #非必要行，指定查询位置    条件查询——&gt;详情  条件表达式 逻辑表达式  使用语法： 12345">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-18T01:09:17.000Z">
+<meta property="article:modified_time" content="2022-03-17T14:27:24.359Z">
+<meta property="article:author" content="Yushen_L">
+<meta property="article:tag" content="MYSQL">
+<meta property="article:tag" content="Databased">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/posts/database/database_index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Yushen&#39;s Note" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="/introduction/" target="_blank">
+          <img class="img-circle img-rotate" src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/logo-avator.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Liu_Yushen</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Engineer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Liu-Yushen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://space.bilibili.com/123821855" target="_blank" title="Bilibili" data-toggle=tooltip data-placement=top><i class="icon icon-bilibili"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">前言</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>本站内容均为学习笔记，欢迎交流指正，分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AMEsim/">AMEsim</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Sport/">Sport</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">信号处理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">数据处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BE%E5%A4%96%E9%98%85%E8%AF%BB/">课外阅读</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cpp/" rel="tag">Cpp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Databased/" rel="tag">Databased</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matlab/" rel="tag">Matlab</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%BF%E7%9C%9F/" rel="tag">仿真</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" rel="tag">信号处理</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E5%8A%A8/" rel="tag">运动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%87%91%E8%9E%8D/" rel="tag">金融</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Cpp/" style="font-size: 13.25px;">Cpp</a> <a href="/tags/Databased/" style="font-size: 14px;">Databased</a> <a href="/tags/MYSQL/" style="font-size: 14px;">MYSQL</a> <a href="/tags/Matlab/" style="font-size: 13.75px;">Matlab</a> <a href="/tags/hexo/" style="font-size: 13.25px;">hexo</a> <a href="/tags/post/" style="font-size: 13px;">post</a> <a href="/tags/%E4%BB%BF%E7%9C%9F/" style="font-size: 13px;">仿真</a> <a href="/tags/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" style="font-size: 13.5px;">信号处理</a> <a href="/tags/%E8%BF%90%E5%8A%A8/" style="font-size: 13px;">运动</a> <a href="/tags/%E9%87%91%E8%9E%8D/" style="font-size: 13px;">金融</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/simulation/AmeSim_solver.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/AMEsim/">AMEsim</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/simulation/AmeSim_solver.html" class="title">AmeSim学习笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-02-28T08:30:20.000Z" itemprop="datePublished">2022-02-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/database/view.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/database/view.html" class="title">TCL-视图</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-07T13:43:17.000Z" itemprop="datePublished">2022-01-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/database/TCL_.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/database/TCL_.html" class="title">TCL-事务管理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-07T12:48:17.000Z" itemprop="datePublished">2022-01-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/database/DDL_constraint.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/database/DDL_constraint.html" class="title">DDL-约束介绍</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-07T08:00:17.000Z" itemprop="datePublished">2022-01-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/database/DML_add.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/database/DML_add.html" class="title">DML-管理数据（记录）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-06T15:00:00.000Z" itemprop="datePublished">2022-01-06</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-database/database_index" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Start-数据库系统（目录）
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/posts/database/database_index.html" class="article-date">
+	  <time datetime="2021-12-18T01:09:17.000Z" itemprop="datePublished">2021-12-18</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Databased/" rel="tag">Databased</a>, <a class="article-tag-link" href="/tags/MYSQL/" rel="tag">MYSQL</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/posts/database/database_index.html#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="软件（MYSQL）"><a href="#软件（MYSQL）" class="headerlink" title="软件（MYSQL）"></a>软件（MYSQL）</h3><ul>
+<li>安装、启动及登录 —— <a href="./MYSQL_start.html" target="_blank">MySQL安装</a></li>
+<li>图形化界面使用</li>
+<li><a href="./MYSQL_command.html" target="_blank">常见指令</a></li>
+</ul>
+<hr>
+<h3 id="SQL语言"><a href="#SQL语言" class="headerlink" title="SQL语言"></a>SQL语言</h3><h4 id="—DQL查询语法-Data-Query-Language"><a href="#—DQL查询语法-Data-Query-Language" class="headerlink" title="—DQL查询语法 (Data Query Language)"></a>—DQL查询语法 (Data Query Language)</h4><ul>
+<li><p><strong>基础查询</strong>——&gt;<a href=".\MYSQL_basic_query.html" target="_blank">详情</a></p>
+<ul>
+<li>列表查询</li>
+<li>列表别名</li>
+</ul>
+<p>使用语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Select</span> Querylist</span><br><span class="line"><span class="keyword">From</span> Tablename; <span class="comment">#非必要行，指定查询位置</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p><strong>条件查询</strong>——&gt;<a href=".\MYSQL_condition_query.html" target="_blank">详情</a></p>
+<ul>
+<li>条件表达式</li>
+<li>逻辑表达式</li>
+</ul>
+<p>使用语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Select</span> </span><br><span class="line">	Querylist</span><br><span class="line"><span class="keyword">From</span> </span><br><span class="line">	Tablename</span><br><span class="line"><span class="keyword">Where</span></span><br><span class="line">	conditional <span class="keyword">statement</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p><strong>排序查询</strong>——&gt;<a href=".\MYSQL_sorting_query.html" target="_blank">详情</a></p>
+<p>使用语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> </span><br><span class="line">	querylist</span><br><span class="line"><span class="keyword">from</span> </span><br><span class="line">	tablename</span><br><span class="line"><span class="keyword">where</span> </span><br><span class="line">	conditional <span class="keyword">statement</span> <span class="comment">#可无</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> </span><br><span class="line">	sortlist <span class="keyword">asc</span>; <span class="comment">#降序为 desc；默认（省略时）asc</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p><strong>常见函数</strong></p>
+<ul>
+<li><p><strong>单行函数</strong>——&gt;<a href=".\MYSQL_1Linefunction.html" target="_blank">函数介绍</a></p>
+<p>用作数据处理，如 <code>concat()</code>、<code>length()</code>、<code>ifnull()</code>，输入单值，输出单值。</p>
+<ul>
+<li>字符函数</li>
+<li>数学函数</li>
+<li>日期函数</li>
+<li>流程控制函数</li>
+</ul>
+</li>
+<li><p><strong>分组函数及查询</strong>——&gt;<a href=".\MYSQL_groupfunction.html" target="_blank">函数介绍</a></p>
+<p>又称为统计函数，用于数据统计，输入一组函数。</p>
+<ul>
+<li>分组函数</li>
+<li>分组查询</li>
+</ul>
+</li>
+</ul>
+<p>使用语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">function</span>(<span class="keyword">value</span>) </span><br><span class="line"><span class="keyword">from</span> Tablename <span class="comment">#此命令可无</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p><strong>链接查询</strong>——&gt;<a href=".\MYSQL_link_query.html" target="_blank">具体说明（99版）</a></p>
+<ul>
+<li><p><strong>内连接</strong>（inner）</p>
+<ul>
+<li>等值连接</li>
+<li>非等值连接</li>
+<li>自连接</li>
+</ul>
+</li>
+<li><p><strong>外连接</strong></p>
+<ul>
+<li>左外连接（left）</li>
+<li>右外连接（right）</li>
+<li>全外连接（full）</li>
+</ul>
+</li>
+<li><strong>交叉连接</strong>（cross）</li>
+</ul>
+<p>使用语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##92版，仅支持内连接</span></span><br><span class="line"><span class="keyword">select</span> Table1.column1 ,Table2.column2</span><br><span class="line"><span class="keyword">from</span> Table1, Table2</span><br><span class="line"><span class="keyword">where</span> Connection_requirements <span class="comment">#标明连接条件，否则出现笛卡尔连接（mXn行）</span></span><br><span class="line"><span class="keyword">And</span> conditions <span class="comment">#使用AND追加筛选条件，多表连接条件，可无</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> cloumn3 <span class="comment">#可无</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> column4 <span class="keyword">desc</span><span class="comment">#可无</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##99版，支持所有类型</span></span><br><span class="line"><span class="keyword">select</span> querylist</span><br><span class="line"><span class="keyword">from</span> Table1 ConnectType<span class="comment">#ConnectType 为连接类型默认inner，见上文括号内容</span></span><br><span class="line"><span class="keyword">join</span> Table2</span><br><span class="line"><span class="keyword">on</span> Connection_requirements</span><br><span class="line"><span class="keyword">where</span> conditions <span class="comment">#可无</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>有92及99两个版本的连接版本语法，推荐使用99版本</p>
+<p>Connection_requirements 可为等值、非等值判断，对应不同类型连接</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p><strong>子查询</strong>——&gt;<a href=".\MYSQL_sub_query.html" target="_blank">具体说明（99版）</a></p>
+<ul>
+<li>标量子查询（1X1）</li>
+<li>列子查询（nX1）</li>
+<li>行子查询（1Xn）</li>
+<li>表子查询（nXm）</li>
+</ul>
+<blockquote>
+<p>使用<code>()</code>将查询放于<code>select</code>，<code>from</code>，<code>where</code>，<code>having</code>，<code>exists</code>之后，作为子查询</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p><strong>分页查询</strong></p>
+<p>可用作分段提交sql查询请求</p>
+<p>使用语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> </span><br><span class="line">	querylist</span><br><span class="line"><span class="keyword">from</span> </span><br><span class="line">	tablename</span><br><span class="line"><span class="keyword">where</span> </span><br><span class="line">	conditional <span class="keyword">statement</span> <span class="comment">#可无</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> </span><br><span class="line">	sortlist <span class="keyword">asc</span> <span class="comment">#可无</span></span><br><span class="line"><span class="keyword">limit</span> </span><br><span class="line">	<span class="keyword">offset</span>,<span class="keyword">size</span>; <span class="comment">#offset为开始条目（初始条目为0），size为条目数</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p><strong>联合查询</strong>  </p>
+<p>用于合并多条查询语句的查询结果（可用作合并来自不同表的查询结果，但理论上要求有一定联系）</p>
+<p>使用语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> talbe1 <span class="keyword">where</span> conditiona statement1</span><br><span class="line"><span class="keyword">union</span> <span class="comment">#使用 union all时可包含重复项</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> talbe2 <span class="keyword">where</span> conditiona statement2;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>联合查询要求多个查询语句的查询列数相同。</li>
+<li>union 默认去重，union all时可包含重复项</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>以上所提到的关键字执行顺序如下：</p>
+<p><code>from</code>→ <code>join</code>→<code>on</code>→<code>where</code>→<code>group by</code>→<code>分组函数</code>→</p>
+<p><code>having</code>→<code>select</code>→<code>distinct</code>→<code>order by</code>→<code>limit</code></p>
+<ul>
+<li>执行过程中生成虚拟表，并对虚拟表进行操作更新虚拟表（连接、分组等），直到<code>select</code>才从虚拟表中提取<strong>查询列</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="DML-数据管理"><a href="#DML-数据管理" class="headerlink" title="DML 数据管理"></a>DML 数据管理</h4><ul>
+<li><p>插入 <code>insert into</code></p>
+</li>
+<li><p>修改 <code>update</code></p>
+</li>
+<li><p>删除 <code>delete</code></p>
+<p>使用语法：<a href=".\DML_add.html" target="_blank">详情</a></p>
+</li>
+</ul>
+<hr>
+<h4 id="DDL-数据定义"><a href="#DDL-数据定义" class="headerlink" title="DDL 数据定义"></a>DDL 数据定义</h4><p>通常在创建数据库、表格时，一般情况下会先对现有表进行删除（除非需要其中数据），再创建表</p>
+<p>通常语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">exists</span> Database_Name ;<span class="comment">#或者TableName</span></span><br><span class="line">creat database Database_Name;<span class="comment">#或Table创建语句</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>库管理语言</strong></p>
+<ul>
+<li><p>创建库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> [<span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span>] DataBase_Name;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>[]</code>内语句为可选语句，通过 <code>if not exists</code> 判断可增加容错性</p>
+</blockquote>
+</li>
+<li><p>修改库</p>
+<p>修改字符集语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">database</span> books <span class="built_in">character</span> <span class="keyword">set</span> gbk;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：通常情况下不修改库的信息。</p>
+</blockquote>
+</li>
+<li><p>删除库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> [<span class="keyword">if</span> <span class="keyword">exists</span>] DataBase_Name;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>表管理语言</strong>——&gt;<a href=".\DDL_database.html" target="_blank">详情</a></p>
+<ul>
+<li><p>创建表</p>
+</li>
+<li><p>修改表</p>
+<ul>
+<li><p>修改列名（<code>change</code>）</p>
+</li>
+<li><p>修改列类型、约束（<code>modify</code>）</p>
+<p>——&gt; <a href=".\DDL_type.html" target="_blank">类型说明</a></p>
+<p>——&gt;<a href=".\DDL_constraint.html" target="_blank">约束说明(含标识列)</a></p>
+</li>
+<li><p>添加、删除列（<code>add</code>，<code>drop</code>）</p>
+</li>
+<li><p>修改表名（<code>rename to</code>）</p>
+</li>
+</ul>
+</li>
+<li><p>复制表</p>
+</li>
+<li><p>删除表</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="TCL-事务管理"><a href="#TCL-事务管理" class="headerlink" title="TCL 事务管理"></a>TCL 事务管理</h4><p><strong>事务</strong>：一个或一组sql语句组成的一个执行单元。</p>
+<p><strong>存储引擎</strong>：用不同的技术存储数据库中的数据与文件（或内存）。</p>
+<blockquote>
+<p>myisam，memory等引擎不支持事务</p>
+</blockquote>
+<p><strong>事务相关操作</strong>——&gt;<a href=".\TCL_.html" target="_blank">详情</a></p>
+<ul>
+<li>事务创建</li>
+<li>保存点 <code>save point</code></li>
+<li>事务并发<ul>
+<li>引发问题：脏读、不可重复读、幻读</li>
+<li>隔离级别：<code>read uncommitted</code> <code>read committed</code> <code>repeatable read</code> <code>serializable</code></li>
+</ul>
+</li>
+</ul>
+<p>基本语法：</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> autocommit = <span class="number">0</span>; <span class="comment">#开始 事务</span></span><br><span class="line"><span class="keyword">start</span> <span class="keyword">transaction</span>; <span class="comment">#可省略</span></span><br><span class="line">	SQL_Statements1;</span><br><span class="line">	SQL_Statements2;</span><br><span class="line">	...</span><br><span class="line"><span class="keyword">commit</span>; <span class="comment">#结束 可使用回滚语句：rollback;</span></span><br></pre></td></tr></table></figure>
+<p><strong>事务的基本属性</strong>（ACDI）</p>
+<ul>
+<li>原子性 Atomicity：事务内容不可分割</li>
+<li>一致性 Consistency：事务执行前后数据状态一致</li>
+<li>隔离性 Isolation：事务的执行不被其他事务干扰（根据隔离级别）</li>
+<li>持久性 Durability：事务一旦提交，永久改变库中数据</li>
+</ul>
+<hr>
+<h4 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h4><blockquote>
+<p>可看作虚拟表，与普通表用法相同，具有临时性。仅保存sql逻辑，不保存查询结果。</p>
+</blockquote>
+<p>视图操作——&gt; <a href=".\view.html" target="_blank">详情</a></p>
+<ul>
+<li>创建 </li>
+<li>修改</li>
+<li>删除</li>
+<li>更新（视图数据）</li>
+</ul>
+<hr>
+<h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p><strong>系统变量</strong>：由系统提供，属于服务器层面</p>
+<blockquote>
+<p>使用<code>@@</code> 标识系统变量</p>
+</blockquote>
+<ul>
+<li><p>全局变量 <code>global</code></p>
+<p>基本语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看系统变量</span></span><br><span class="line"><span class="keyword">Show</span> <span class="keyword">global</span> <span class="keyword">variables</span>; <span class="comment">#global为全局</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">global</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'%char%'</span>; <span class="comment">#查找一定变量</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> @@global.VariableName; <span class="comment">#查看特定全局变量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#给变量赋值</span></span><br><span class="line"><span class="keyword">set</span> @@global.VariableName= value1;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>给全局变量赋值对所有会话（连接）有效，但不跨重启</p>
+</blockquote>
+</li>
+<li><p>会话变量 <code>session</code></p>
+<p>基本语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看系统变量</span></span><br><span class="line"><span class="keyword">Show</span> [<span class="keyword">session</span>] <span class="keyword">variables</span>; <span class="comment">#[session]为会话，可省略</span></span><br><span class="line"><span class="keyword">show</span> [<span class="keyword">session</span>] <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'%char%'</span>; </span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> @@[session.]VariableName; <span class="comment">#查看特定变量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#给变量赋值</span></span><br><span class="line"><span class="keyword">set</span>  @@VariableName= value1;</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">session</span> VariableName= value1;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>自定义变量</strong></p>
+<ul>
+<li><p>用户变量：作用于当前会话</p>
+<p>使用语法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#声明(也可用作赋值)</span></span><br><span class="line"><span class="keyword">set</span> @VariableName := value1;</span><br><span class="line"><span class="keyword">select</span> @VariableName := value1;</span><br><span class="line"></span><br><span class="line"><span class="comment">#赋值</span></span><br><span class="line"><span class="keyword">select</span> column1 <span class="keyword">into</span> @VariableName</span><br><span class="line"><span class="keyword">from</span> TableName;</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看、使用</span></span><br><span class="line"><span class="keyword">select</span> @VariableName;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用 <code>@</code> 符号区分用户变量和列名，使用<code>:=</code> 对变量赋值</p>
+<p><code>select</code> 为查询部分，在后续使用查询语法。</p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#用户变量</span></span><br><span class="line"><span class="keyword">set</span> @<span class="keyword">count</span> := <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">into</span> @<span class="keyword">count</span></span><br><span class="line"><span class="keyword">from</span> employees;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> @<span class="keyword">count</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>局部变量：仅作用于其定义的<code>begin</code> <code>end</code>中</p>
+<p>使用语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#声明</span></span><br><span class="line"><span class="keyword">declare</span> VariableName <span class="keyword">type</span> [<span class="keyword">default</span> value1];</span><br><span class="line"></span><br><span class="line"><span class="comment">#赋值</span></span><br><span class="line"><span class="keyword">set</span> VariableName := value1;</span><br><span class="line"><span class="keyword">select</span> @VariableName := value1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> column1 <span class="keyword">into</span> VariableName</span><br><span class="line"><span class="keyword">from</span> TableName;</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看、使用</span></span><br><span class="line"><span class="keyword">select</span> VariableName;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通常不需要使用<code>@</code></p>
+<p><code>[]</code>中为非必要语句。局部变量必须声明类型，且需在<code>begin</code> <code>end</code> 域内第一句。</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h4 id="存储过程与函数"><a href="#存储过程与函数" class="headerlink" title="存储过程与函数"></a>存储过程与函数</h4><p>存储过程：一组预先编译好的sql语句集合（批量处理语句）</p>
+<blockquote>
+<p>与函数/方法类似，可简化操作、提高效率（较少编译次数及连接次数）</p>
+</blockquote>
+<p><strong>创建过程</strong></p>
+<ul>
+<li><p>参数列表</p>
+<ul>
+<li><p>参数模式 [mode]</p>
+<p><code>in</code>：该参数可作为输入</p>
+<p><code>out</code>：该参数可作为输出</p>
+<p><code>inout</code>：支持输入和返回</p>
+</li>
+<li><p>参数名 [paramenter]</p>
+</li>
+<li><p>参数类型 [type]</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">delimiter $</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">procedure</span> PName(<span class="keyword">mode</span> paramenter <span class="keyword">type</span>)</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	SQL_statements;</span><br><span class="line">	...</span><br><span class="line"><span class="keyword">end</span> $</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>存储过程中每条语句结尾需要添加 <code>;</code>   </p>
+<p>可通过 <code>delimiter</code> 重新设置存储过程的结束标识</p>
+</blockquote>
+<p><strong>调用过程</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">call</span> PName(<span class="keyword">parameters</span>);</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<ul>
+<li><code>in</code> 模式</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> girls;</span><br><span class="line">delimiter $ <span class="comment">#定义结束标志</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">procedure</span> myp2(<span class="keyword">in</span> beautyName <span class="built_in">varchar</span>(<span class="number">20</span>))</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">select</span> bo.*</span><br><span class="line">    <span class="keyword">from</span> boys bo</span><br><span class="line">    <span class="keyword">right</span> <span class="keyword">join</span> beauty b <span class="keyword">on</span> bo.id = b.boyfriend_id</span><br><span class="line">    <span class="keyword">where</span> beautyName = b.name ;</span><br><span class="line"><span class="keyword">end</span> $</span><br><span class="line"></span><br><span class="line"><span class="keyword">call</span>  myp2(<span class="string">'赵敏'</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>out</code> 模式</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">procedure</span> myp3(<span class="keyword">in</span> beautyName <span class="built_in">varchar</span>(<span class="number">20</span>),<span class="keyword">out</span> boyName <span class="built_in">varchar</span>(<span class="number">20</span>))</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">select</span> bo.boyName <span class="keyword">into</span> boyName</span><br><span class="line">    <span class="keyword">from</span> boys bo</span><br><span class="line">    <span class="keyword">inner</span> <span class="keyword">join</span> beauty b <span class="keyword">on</span> bo.id = b.boyfriend_id</span><br><span class="line">    <span class="keyword">where</span> beautyName = b.name;</span><br><span class="line"><span class="keyword">end</span> $</span><br><span class="line"></span><br><span class="line"><span class="keyword">call</span> myp3(<span class="string">'小昭'</span>,@bName);<span class="comment">#调用</span></span><br><span class="line"><span class="keyword">select</span> @bName;</span><br></pre></td></tr></table></figure>
+<p><strong>删除过程</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">procedure</span> PName;<span class="comment">#一次只能删除一个</span></span><br></pre></td></tr></table></figure>
+<p><strong>查看过程</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">procedure</span> PName;</span><br></pre></td></tr></table></figure>
+<p><strong>创建函数</strong></p>
+<p>函数与存储过程相似，但有且仅有一个返回值</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">function</span> funcName(paramenter <span class="keyword">type</span>) <span class="keyword">returns</span> return_type <span class="comment">#声明</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	SQL_statements;</span><br><span class="line">	...</span><br><span class="line">	return </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>错误1418：log_bin_trust_function_creators 变量为0时，用户不得创建或修改存储函数，将该变量设置为1即可： <code>set global log_bin_trust_function_creators=TRUE;</code></p>
+</blockquote>
+<p><strong>删除函数</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">function</span> funcName;<span class="comment">#一次只能删除一个</span></span><br></pre></td></tr></table></figure>
+<p> <strong>查看函数</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">function</span> funcName;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="流程控制结构"><a href="#流程控制结构" class="headerlink" title="流程控制结构"></a>流程控制结构</h4><ul>
+<li><p><strong>顺序结构</strong></p>
+</li>
+<li><p><strong>分支结构</strong>——&gt;<a href=".\MYSQL_1Linefunction.html#jump" target="_blank">函数介绍（流程控制函数）</a></p>
+<ul>
+<li><p><code>if(a,b,c)</code></p>
+</li>
+<li><p><code>if</code> 结构</p>
+<p>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if condition1 then value1/statement1 ;</span><br><span class="line">else if condition2 then value1/statement2;</span><br><span class="line">...</span><br><span class="line">else value1/statement2;</span><br><span class="line"><span class="keyword">end</span> <span class="keyword">if</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>case</code> 结构</p>
+<p>示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#建立存储过程，按成绩显示等级</span></span><br><span class="line">delimiter $</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">procedure</span> grade(<span class="keyword">in</span> score <span class="built_in">int</span>)</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line"><span class="keyword">case</span></span><br><span class="line">  <span class="keyword">when</span> score <span class="keyword">between</span> <span class="number">90</span> <span class="keyword">and</span> <span class="number">100</span> <span class="keyword">then</span> <span class="keyword">select</span> <span class="string">'A'</span>;</span><br><span class="line">  when score between 80 and 90 then <span class="keyword">select</span> <span class="string">'B'</span>;</span><br><span class="line">  when score between 60 and 80 then <span class="keyword">select</span> <span class="string">'c'</span>;</span><br><span class="line">  else <span class="keyword">select</span> <span class="string">'D'</span>;</span><br><span class="line"><span class="keyword">end</span> <span class="keyword">case</span>;</span><br><span class="line"><span class="keyword">end</span> $</span><br><span class="line">delimiter ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">call</span> grade(<span class="number">89</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>循环结构</strong></p>
+<ul>
+<li><p><code>while</code> 结构</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[tap:] while Condition1 <span class="keyword">do</span></span><br><span class="line">	sql_statements;</span><br><span class="line">	...</span><br><span class="line"><span class="keyword">end</span> <span class="keyword">while</span> [tap];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>loop</code> 结构</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[tap:] loop</span><br><span class="line">	sql_statements;</span><br><span class="line">	...</span><br><span class="line"><span class="keyword">end</span> <span class="keyword">loop</span> [tap];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>repeat</code> 结构</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[tap:] repeat</span><br><span class="line">	sql_statements;</span><br><span class="line">	...</span><br><span class="line">until end_Condition</span><br><span class="line"><span class="keyword">end</span> <span class="keyword">repeat</span> [tap];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>退出语句</p>
+<ul>
+<li><code>iterate</code> ：开始下次循环【countinue】</li>
+<li><code>leave</code>：结束当前所在循环【break】</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="/introduction/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/logo-avator.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="/introduction/" target="_blank"><span class="text-dark">Liu_Yushen</span><small class="ml-1x">Engineer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/posts/database/MYSQL_start.html" title="MYSQL安装"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/posts/sport/%E5%81%A5%E8%BA%AB.html" title="健身计划（一）"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Liu-Yushen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://space.bilibili.com/123821855" target="_blank" title="Bilibili" data-toggle=tooltip data-placement=top><i class="icon icon-bilibili"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2022 Yushen_L
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: true,
+    appId: 'JtEi77W9irt2uC5ebtRpOJB5-gzGzoHsz',
+    appKey: 'UEtSjUe18cyvpt5FLjobTkyM',
+    placeholder: '评价一下？',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

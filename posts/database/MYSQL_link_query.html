@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>SQL-连接查询 | Yushen</title>
+  <meta name="description" content="连接查询语法以下介绍语法均为99版基本使用语法 123456##99版，支持所有类型select querylistfrom Table1 ConnectType join Table2  on Connection_requirementswhere conditions #可无  通常为各表取别名，以壁面歧义，增加可读性。 ConnectType 可选 内连inner ，左外left ，右外r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL-连接查询">
+<meta property="og:url" content="http://yoursite.com/posts/database/MYSQL_link_query.html">
+<meta property="og:site_name" content="Yushen&#39;s Note">
+<meta property="og:description" content="连接查询语法以下介绍语法均为99版基本使用语法 123456##99版，支持所有类型select querylistfrom Table1 ConnectType join Table2  on Connection_requirementswhere conditions #可无  通常为各表取别名，以壁面歧义，增加可读性。 ConnectType 可选 内连inner ，左外left ，右外r">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-28T07:25:00.000Z">
+<meta property="article:modified_time" content="2022-03-17T13:26:26.658Z">
+<meta property="article:author" content="Yushen_L">
+<meta property="article:tag" content="MYSQL">
+<meta property="article:tag" content="Databased">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/posts/database/MYSQL_link_query.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Yushen&#39;s Note" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="/introduction/" target="_blank">
+          <img class="img-circle img-rotate" src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/logo-avator.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Liu_Yushen</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Engineer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Liu-Yushen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://space.bilibili.com/123821855" target="_blank" title="Bilibili" data-toggle=tooltip data-placement=top><i class="icon icon-bilibili"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">前言</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>本站内容均为学习笔记，欢迎交流指正，分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AMEsim/">AMEsim</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Sport/">Sport</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">信号处理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">数据处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BE%E5%A4%96%E9%98%85%E8%AF%BB/">课外阅读</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cpp/" rel="tag">Cpp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Databased/" rel="tag">Databased</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matlab/" rel="tag">Matlab</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%BF%E7%9C%9F/" rel="tag">仿真</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" rel="tag">信号处理</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E5%8A%A8/" rel="tag">运动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%87%91%E8%9E%8D/" rel="tag">金融</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Cpp/" style="font-size: 13.25px;">Cpp</a> <a href="/tags/Databased/" style="font-size: 14px;">Databased</a> <a href="/tags/MYSQL/" style="font-size: 14px;">MYSQL</a> <a href="/tags/Matlab/" style="font-size: 13.75px;">Matlab</a> <a href="/tags/hexo/" style="font-size: 13.25px;">hexo</a> <a href="/tags/post/" style="font-size: 13px;">post</a> <a href="/tags/%E4%BB%BF%E7%9C%9F/" style="font-size: 13px;">仿真</a> <a href="/tags/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" style="font-size: 13.5px;">信号处理</a> <a href="/tags/%E8%BF%90%E5%8A%A8/" style="font-size: 13px;">运动</a> <a href="/tags/%E9%87%91%E8%9E%8D/" style="font-size: 13px;">金融</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/simulation/AmeSim_solver.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/AMEsim/">AMEsim</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/simulation/AmeSim_solver.html" class="title">AmeSim学习笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-02-28T08:30:20.000Z" itemprop="datePublished">2022-02-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/database/view.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/database/view.html" class="title">TCL-视图</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-07T13:43:17.000Z" itemprop="datePublished">2022-01-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/database/TCL_.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/database/TCL_.html" class="title">TCL-事务管理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-07T12:48:17.000Z" itemprop="datePublished">2022-01-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/database/DDL_constraint.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/database/DDL_constraint.html" class="title">DDL-约束介绍</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-07T08:00:17.000Z" itemprop="datePublished">2022-01-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/database/DML_add.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/database/DML_add.html" class="title">DML-管理数据（记录）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-06T15:00:00.000Z" itemprop="datePublished">2022-01-06</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-database/MYSQL_link_query" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SQL-连接查询
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/posts/database/MYSQL_link_query.html" class="article-date">
+	  <time datetime="2021-12-28T07:25:00.000Z" itemprop="datePublished">2021-12-28</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Databased/" rel="tag">Databased</a>, <a class="article-tag-link" href="/tags/MYSQL/" rel="tag">MYSQL</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/posts/database/MYSQL_link_query.html#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h4 id="连接查询语法"><a href="#连接查询语法" class="headerlink" title="连接查询语法"></a>连接查询语法</h4><p>以下介绍语法均为99版基本使用语法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##99版，支持所有类型</span></span><br><span class="line"><span class="keyword">select</span> querylist</span><br><span class="line"><span class="keyword">from</span> Table1 ConnectType </span><br><span class="line"><span class="keyword">join</span> Table2  </span><br><span class="line"><span class="keyword">on</span> Connection_requirements</span><br><span class="line"><span class="keyword">where</span> conditions <span class="comment">#可无</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通常为各表取别名，以壁面歧义，增加可读性。</p>
+<p>ConnectType 可选 内连<code>inner</code> ，左外<code>left</code> ，右外<code>right</code>，全外<code>full</code> ，交叉连接<code>cross</code>，缺省时为inner</p>
+</blockquote>
+<h4 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h4><ul>
+<li><p><strong>等值连接</strong></p>
+<p>连接条件为等值判断，从两个表中查询数据合并为一个表。</p>
+<p>示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查询部门个数&gt;3的城市名和部门个数（分组、筛选）</span></span><br><span class="line"><span class="keyword">select</span>  city, <span class="keyword">count</span>(*) </span><br><span class="line"><span class="keyword">from</span> departments d</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> locations l</span><br><span class="line"><span class="keyword">on</span> l.location_id = d.location_id</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> d.location_id</span><br><span class="line"><span class="keyword">having</span> <span class="keyword">count</span>(*) &gt;<span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#查询员工名、部门名、工种名，并按部门名降序（多表连接）</span></span><br><span class="line"><span class="keyword">select</span> last_name,department_name,job_title</span><br><span class="line"><span class="keyword">from</span> employees e</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> departments d</span><br><span class="line"><span class="keyword">on</span> e.department_id = e.department_id</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> jobs j</span><br><span class="line"><span class="keyword">on</span> e.job_id = j.job_id</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> department_name <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>非等值连接</strong></p>
+<p>除连接条件改变后，其余格式、用法与等值连接相同。</p>
+</li>
+<li><p><strong>自连接</strong></p>
+<p>将一张表视为多张，在同一张表中查找信息进行匹配。</p>
+<p>示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查找上级</span></span><br><span class="line"><span class="keyword">select</span> e.last_name,m.last_name</span><br><span class="line"><span class="keyword">from</span> employees e</span><br><span class="line"><span class="keyword">join</span> employees m</span><br><span class="line"><span class="keyword">on</span> e.manager_id = m.employee_id</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="外部连接"><a href="#外部连接" class="headerlink" title="外部连接"></a>外部连接</h4><p>用于查询部分数据仅在一个表中存的情况</p>
+<ol>
+<li>区分主从表，若从表中存在匹配对象，显示匹配的值；若无，显示null</li>
+<li>查询结果为主表中的所有记录：结果= 内连结果 + 【主表记录-null】</li>
+</ol>
+<ul>
+<li><p><strong>左/右外连接</strong></p>
+<p>左外连接<code>left</code>时，<code>join</code>左侧为主表；右外连接<code>right</code>时，<code>join</code>右侧为主表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> girls;</span><br><span class="line"><span class="keyword">select</span> b.name</span><br><span class="line"><span class="keyword">from</span> beauty b</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> boys bo</span><br><span class="line"><span class="keyword">on</span> bo.id = b.boyfriend_id</span><br><span class="line"><span class="keyword">where</span>  bo.id <span class="keyword">is</span> <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用时先根据求取目标，确定主表</p>
+</blockquote>
+</li>
+<li><p>全外连接</p>
+<p>相当于将两个表分别进行左外、右外连接后将结果合并。<strong>（MYSQL不支持<code>full</code>）</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> girls;</span><br><span class="line"><span class="keyword">select</span> b.* ,bo.*</span><br><span class="line"><span class="keyword">from</span> beauty b</span><br><span class="line"><span class="keyword">full</span> <span class="keyword">outer</span> <span class="keyword">join</span> boys bo</span><br><span class="line"><span class="keyword">on</span> bo.id = b.boyfriend_id ;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="交叉连接"><a href="#交叉连接" class="headerlink" title="交叉连接"></a>交叉连接</h4><p>  相当于笛卡尔乘积</p>
+<p>  示例：</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#99交叉连接</span></span><br><span class="line"><span class="keyword">use</span> girls;</span><br><span class="line"><span class="keyword">select</span> b.name ,bo.boyName</span><br><span class="line"><span class="keyword">from</span> beauty b</span><br><span class="line"><span class="keyword">cross</span> <span class="keyword">join</span> boys bo;</span><br><span class="line"></span><br><span class="line"><span class="comment">#等效笛卡尔</span></span><br><span class="line"><span class="keyword">select</span> b.name ,bo.boyName</span><br><span class="line"><span class="keyword">from</span> beauty b, boys bo;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="/introduction/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/logo-avator.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="/introduction/" target="_blank"><span class="text-dark">Liu_Yushen</span><small class="ml-1x">Engineer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/posts/database/DDL_database.html" title="DDL-表管理"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/posts/database/MYSQL_sub_query.html" title="SQL-子查询"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Liu-Yushen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://space.bilibili.com/123821855" target="_blank" title="Bilibili" data-toggle=tooltip data-placement=top><i class="icon icon-bilibili"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2022 Yushen_L
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: true,
+    appId: 'JtEi77W9irt2uC5ebtRpOJB5-gzGzoHsz',
+    appKey: 'UEtSjUe18cyvpt5FLjobTkyM',
+    placeholder: '评价一下？',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

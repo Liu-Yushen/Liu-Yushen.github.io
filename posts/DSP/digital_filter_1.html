@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Matlab FIR及IIR 数字滤波器  (一) | Yushen</title>
+  <meta name="description" content="前言:  本文为本人在学习华科”数字信号分析理论与实践”课程所做的记录, 由于本人能力有限,在实现方法等各方面存在问题,欢迎交流指出. 本文将介绍实现最简单的FIR数字滤波器(fir1函数) ,以及附带的滤波函数(filter)  FIR 滤波器原理分析 设计一个滤波器相当于设计一个系统,通过它的传递函数屏蔽掉不需要的输入信号,保留目标信息.  ​        FIR(Finite Impul">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Matlab FIR及IIR 数字滤波器  (一)">
+<meta property="og:url" content="http://yoursite.com/posts/DSP/digital_filter_1.html">
+<meta property="og:site_name" content="Yushen&#39;s Note">
+<meta property="og:description" content="前言:  本文为本人在学习华科”数字信号分析理论与实践”课程所做的记录, 由于本人能力有限,在实现方法等各方面存在问题,欢迎交流指出. 本文将介绍实现最简单的FIR数字滤波器(fir1函数) ,以及附带的滤波函数(filter)  FIR 滤波器原理分析 设计一个滤波器相当于设计一个系统,通过它的传递函数屏蔽掉不需要的输入信号,保留目标信息.  ​        FIR(Finite Impul">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/FIR_low.png">
+<meta property="og:image" content="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/FIR_high.png">
+<meta property="og:image" content="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/FIR_bandpass.png">
+<meta property="og:image" content="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/FIR_bandstop.png">
+<meta property="og:image" content="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/Fir_filter.png">
+<meta property="article:published_time" content="2020-11-06T10:30:20.000Z">
+<meta property="article:modified_time" content="2022-03-17T10:01:46.778Z">
+<meta property="article:author" content="Yushen_L">
+<meta property="article:tag" content="信号处理">
+<meta property="article:tag" content="Matlab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/FIR_low.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/posts/DSP/digital_filter_1.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Yushen&#39;s Note" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
+  
+  
+  
+  
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+
+  <meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="/introduction/" target="_blank">
+          <img class="img-circle img-rotate" src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/logo-avator.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Liu_Yushen</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Engineer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Liu-Yushen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://space.bilibili.com/123821855" target="_blank" title="Bilibili" data-toggle=tooltip data-placement=top><i class="icon icon-bilibili"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">前言</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>本站内容均为学习笔记，欢迎交流指正，分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AMEsim/">AMEsim</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cpp/">Cpp</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Sport/">Sport</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">信号处理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">数据处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BE%E5%A4%96%E9%98%85%E8%AF%BB/">课外阅读</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cpp/" rel="tag">Cpp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Databased/" rel="tag">Databased</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/" rel="tag">MYSQL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matlab/" rel="tag">Matlab</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%BF%E7%9C%9F/" rel="tag">仿真</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" rel="tag">信号处理</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E5%8A%A8/" rel="tag">运动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%87%91%E8%9E%8D/" rel="tag">金融</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Cpp/" style="font-size: 13.25px;">Cpp</a> <a href="/tags/Databased/" style="font-size: 14px;">Databased</a> <a href="/tags/MYSQL/" style="font-size: 14px;">MYSQL</a> <a href="/tags/Matlab/" style="font-size: 13.75px;">Matlab</a> <a href="/tags/hexo/" style="font-size: 13.25px;">hexo</a> <a href="/tags/post/" style="font-size: 13px;">post</a> <a href="/tags/%E4%BB%BF%E7%9C%9F/" style="font-size: 13px;">仿真</a> <a href="/tags/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" style="font-size: 13.5px;">信号处理</a> <a href="/tags/%E8%BF%90%E5%8A%A8/" style="font-size: 13px;">运动</a> <a href="/tags/%E9%87%91%E8%9E%8D/" style="font-size: 13px;">金融</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/simulation/AmeSim_solver.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/AMEsim/">AMEsim</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/simulation/AmeSim_solver.html" class="title">AmeSim学习笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-02-28T08:30:20.000Z" itemprop="datePublished">2022-02-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/database/view.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/database/view.html" class="title">TCL-视图</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-07T13:43:17.000Z" itemprop="datePublished">2022-01-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/database/TCL_.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/database/TCL_.html" class="title">TCL-事务管理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-07T12:48:17.000Z" itemprop="datePublished">2022-01-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/database/DDL_constraint.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/database/DDL_constraint.html" class="title">DDL-约束介绍</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-07T08:00:17.000Z" itemprop="datePublished">2022-01-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/posts/database/DML_add.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MYSQL数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/posts/database/DML_add.html" class="title">DML-管理数据（记录）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-01-06T15:00:00.000Z" itemprop="datePublished">2022-01-06</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-DSP/digital_filter_1" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Matlab FIR及IIR 数字滤波器  (一)
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/posts/DSP/digital_filter_1.html" class="article-date">
+	  <time datetime="2020-11-06T10:30:20.000Z" itemprop="datePublished">2020-11-06</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">信号处理</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Matlab/" rel="tag">Matlab</a>, <a class="article-tag-link" href="/tags/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" rel="tag">信号处理</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/posts/DSP/digital_filter_1.html#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <blockquote>
+<p>前言: </p>
+<p>本文为本人在学习华科”数字信号分析理论与实践”课程所做的记录, 由于本人能力有限,在实现方法等各方面存在问题,欢迎交流指出.</p>
+<p>本文将介绍实现最简单的FIR数字滤波器(fir1函数) ,以及附带的滤波函数(filter)</p>
+</blockquote>
+<h3 id="FIR-滤波器"><a href="#FIR-滤波器" class="headerlink" title="FIR 滤波器"></a>FIR 滤波器</h3><h4 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h4><blockquote>
+<p>设计一个滤波器相当于设计一个系统,通过它的传递函数屏蔽掉不需要的输入信号,保留目标信息.</p>
+</blockquote>
+<p>​        FIR(Finite Impulse Response)滤波器,即”有限长单位冲激响应滤波器”,其脉冲响应是有限的持续时间，并在有限的时间内稳定为零。</p>
+<p>其傅立叶系数h(n)实际上就是数字滤波器的冲击响应.</p>
+<script type="math/tex; mode=display">
+h(k)=a(k),k=0,1,2,...,N</script><p>其单边Z变he换为</p>
+<script type="math/tex; mode=display">
+H(z)=\sum^N_{k=0}{a_kZ^{-k}}</script><ul>
+<li><strong>低通滤波器</strong></li>
+</ul>
+<p>理想的滤波器频率响应方程为1</p>
+<script type="math/tex; mode=display">
+H_d(\omega)=\begin{cases}  
+1& |\omega|\leq \omega_c \\
+0& \omega<|\omega|<\pi
+\end{cases}</script><script type="math/tex; mode=display">
+h_d(k)=\frac{\omega_c}{pi}\frac{sin(\omega_ck)}{\omega_ck};k=0;\pm1,\pm2,..,\infty</script><p>对系数进行归一化, 即  </p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+a_0 &= v_1 = {f_c}/{\frac{1}{2}f_s}\\
+a_n &= \frac{sin(n \pi v_1)}{n \pi};\ n=0;\pm1,\pm2,..,\infty
+\end{aligned}</script><ul>
+<li><strong>高通滤波器</strong></li>
+</ul>
+<p>理想的滤波器频率响应方程, 及系数计算</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+
+&H_d(\omega)=\begin{cases}  
+1& |\omega|\geq \omega_c \\
+0& other
+\end{cases}\\
+
+a_0 &= 1-v_1 \\
+a_n &= -\frac{sin(n \pi v_1)} {n \pi};\ n=0;\pm1,\pm2,..,\infty
+\end{aligned}</script><ul>
+<li><strong>带通系数</strong></li>
+</ul>
+<p>理想的滤波器频率响应方程,及系数计算</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&H_d(\omega)=\begin{cases}  
+1& \omega\leq|\omega|\leq\pi \\
+0&other
+\end{cases}\\
+
+a_0 &= v_2-v_1 \\
+a_n &= \frac{sin(n \pi v_2)-sin(n \pi v_1)}{n \pi};\ n=0;\pm1,\pm2,..,\infty
+\end{aligned}</script><p>由于h(k)可能是无限长序列，是物理不可实现的,为此要寻找一个h(n)，在相应的误差准则下最近逼近h(n)。</p>
+<ul>
+<li><strong>带阻系数</strong></li>
+</ul>
+<p>理想的滤波器频率响应方程,及系数计算</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&H_d(\omega)=\begin{cases}  
+0& \omega\leq|\omega|\leq\pi \\
+1&other
+\end{cases}\\
+a_0 &= 1-(v_2-v_1) \\
+a_n &= -\frac{sin(n \pi v_2)-sin(n \pi v_1)}{n \pi};\ n=0;\pm1,\pm2,..,\infty
+\end{aligned}</script><ul>
+<li><strong>系数处理(窗函数法)</strong><ul>
+<li>$h(k)$ 可能是无限长序列，是物理不可实现的,为此要寻找一个 $h(n)$，在相应的误差准则下最近逼近$h(k)$。</li>
+<li>直接截取前n各系数, 故需要通过窗函数方法对系数进行平滑处理, 减小由于截断带来的跳动.</li>
+</ul>
+</li>
+</ul>
+<script type="math/tex; mode=display">
+h(n)=w(n)·a(n)</script><blockquote>
+<p>本实现中默认使用汉宁(Hamming)窗函数对系数进行平滑处理.</p>
+</blockquote>
+<h4 id="程序实现"><a href="#程序实现" class="headerlink" title="程序实现"></a>程序实现</h4><p>首先进行进行输入参数的判断</p>
+<ul>
+<li>必须要输入的参数有<strong>采样点数目</strong><code>Np</code> ,<strong>相对截止频率</strong> <code>v</code> .其中<code>v</code>可以为二维数组</li>
+<li>可选参数有 <strong>加窗类型</strong> (通过指针<code>p1</code>保存) , 滤波器类型(通过指针<code>p2</code>保存) </li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span> = <span class="title">firl_fun</span><span class="params">(Np,v,varargin)</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">% % 使用方法 </span></span><br><span class="line"><span class="comment">% % firl_fun(Np,v) N为取样点数目，低通滤波器，截止频率v*fs</span></span><br><span class="line"><span class="comment">% % firl_fun(Np,v,@wintype) 加窗类型wintype,如 @hamming</span></span><br><span class="line"><span class="comment">% % firl_fun(Np,v,type) 滤波方式type可选'high'高通,'low'低通</span></span><br><span class="line"><span class="comment">% % firl_fun(Np,v,@wintype,type)</span></span><br><span class="line"><span class="comment">% % firl_fun(Np,[v1,v2]) </span></span><br><span class="line"><span class="comment">% % firl_fun(Np,[v1,v2],type) 可选'bandpass'带通,'bandstop'带阻</span></span><br><span class="line"><span class="comment">% % firl_fun(Np,[v1,v2],@wintype,type)</span></span><br><span class="line"></span><br><span class="line">N = <span class="built_in">floor</span>(Np/<span class="number">2</span>);</span><br><span class="line">narginchk(<span class="number">2</span>,<span class="number">4</span>);<span class="comment">%检查输入参数个数</span></span><br><span class="line">p1 = @hamming; <span class="comment">%p1指向窗函数(默认汉宁)</span></span><br><span class="line">p2 = <span class="string">'low'</span>; <span class="comment">%p2指向滤波类型（默认低通）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%判断滤波类型</span></span><br><span class="line"><span class="keyword">switch</span> nargin</span><br><span class="line">    <span class="comment">%只有3个参数的判断，</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span></span><br><span class="line">        <span class="keyword">if</span> isa(varargin&#123;<span class="number">1</span>&#125;,<span class="string">'function_handle'</span>)</span><br><span class="line">            p1 = varargin&#123;<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            p2 = varargin&#123;<span class="number">1</span>&#125;;          </span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="comment">%4参数读入    </span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">4</span></span><br><span class="line">        p1 = varargin&#123;<span class="number">1</span>&#125;;</span><br><span class="line">        p2 = varargin&#123;<span class="number">2</span>&#125;; </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>然后根据所选类型进行原理中的系数计算, 完成滤波器设计.</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">k=<span class="number">1</span>; </span><br><span class="line"><span class="comment">%判断滤波器类型</span></span><br><span class="line"><span class="keyword">switch</span> p2 </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'low'</span>  <span class="comment">%低通</span></span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">i</span>=-N:N </span><br><span class="line">            f=<span class="built_in">i</span>*<span class="built_in">pi</span>; </span><br><span class="line">            h(k)=<span class="built_in">sin</span>(v(<span class="number">1</span>)*f)/f; <span class="comment">%计算响应函数</span></span><br><span class="line">            k=k+<span class="number">1</span>; </span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        h(N+<span class="number">1</span>)=v(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'high'</span> <span class="comment">%高通</span></span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">i</span>=-N:N </span><br><span class="line">            f=<span class="built_in">i</span>*<span class="built_in">pi</span>; </span><br><span class="line">            h(k)=-<span class="built_in">sin</span>(v(<span class="number">1</span>)*f)/f; </span><br><span class="line">            k=k+<span class="number">1</span>; </span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        h(N+<span class="number">1</span>)=<span class="number">1</span>-v(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'bandpass'</span> <span class="comment">%带通</span></span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">i</span>=-N:N </span><br><span class="line">            f=<span class="built_in">i</span>*<span class="built_in">pi</span>; </span><br><span class="line">            h(k)=(<span class="built_in">sin</span>(v(<span class="number">2</span>)*f)-<span class="built_in">sin</span>(v(<span class="number">1</span>)*f))/f; </span><br><span class="line">            k=k+<span class="number">1</span>; </span><br><span class="line">        <span class="keyword">end</span>  </span><br><span class="line">        h(N+<span class="number">1</span>)=v(<span class="number">2</span>)-v(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'bandstop'</span> <span class="comment">%带通阻止</span></span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">i</span>=-N:N </span><br><span class="line">            f=<span class="built_in">i</span>*<span class="built_in">pi</span>; </span><br><span class="line">            h(k)=-(<span class="built_in">sin</span>(v(<span class="number">2</span>)*f)-<span class="built_in">sin</span>(v(<span class="number">1</span>)*f))/f; </span><br><span class="line">            k=k+<span class="number">1</span>; </span><br><span class="line">        <span class="keyword">end</span>  </span><br><span class="line">        h(N+<span class="number">1</span>)=<span class="number">1</span>-(v(<span class="number">2</span>)-v(<span class="number">1</span>));</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">b = h.*p1(<span class="number">2</span>*N+<span class="number">1</span>)';<span class="comment">% -N:N的长度为2N+1</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="实际效果"><a href="#实际效果" class="headerlink" title="实际效果"></a>实际效果</h4><p>低通、高通</p>
+<p><center> <figure> 
+<img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/FIR_low.png" style="zoom:50%"/> 
+<img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/FIR_high.png" style="zoom:50%" /> 
+</figure> </center><br>带通、带阻</p>
+<p><center> <figure> 
+  <img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/FIR_bandpass.png" style="zoom:50%"/> 
+    <img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/FIR_bandstop.png" style="zoom:50%" /> 
+</figure> </center></p>
+<h4 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">clear;</span><br><span class="line"><span class="comment">%设计的样本 %原信号</span></span><br><span class="line">Fs = <span class="number">2048</span>;</span><br><span class="line">dt=<span class="number">1.0</span>/Fs;</span><br><span class="line">T =<span class="number">1</span>; N=T/dt;</span><br><span class="line">t=[<span class="number">0</span>:N<span class="number">-1</span>]/N;</span><br><span class="line"></span><br><span class="line">x1 =<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">50</span>*t)+<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">300</span>*t) +<span class="built_in">sin</span>(<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">500</span>*t);</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>); </span><br><span class="line"><span class="built_in">plot</span>(t,x1); </span><br><span class="line">axis([<span class="number">0</span>, <span class="number">0.1</span>, <span class="number">-2</span>,<span class="number">2</span>]);</span><br><span class="line">title(<span class="string">"原信号时域"</span>); </span><br><span class="line"></span><br><span class="line">P=fft(x1,N);</span><br><span class="line">Pyy =<span class="number">2</span>*<span class="built_in">sqrt</span>(P.* <span class="built_in">conj</span>(P))/N;</span><br><span class="line">f=<span class="built_in">linspace</span>(<span class="number">0</span>,Fs/<span class="number">2</span>,N/<span class="number">2</span>);</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(f,Pyy(<span class="number">1</span>:N/<span class="number">2</span>));</span><br><span class="line">title(<span class="string">"原信号频域"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">%选择滤波器</span></span><br><span class="line"><span class="built_in">type</span> = <span class="number">4</span>;</span><br><span class="line"><span class="comment">%--------------------------系统自带fir1 和filter</span></span><br><span class="line"><span class="keyword">switch</span> <span class="built_in">type</span> </span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span> </span><br><span class="line">        b = fir1(<span class="number">48</span>,<span class="number">0.1</span>);</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span> </span><br><span class="line">        b = fir1(<span class="number">48</span>,<span class="number">0.1</span>,<span class="string">'high'</span>);</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span></span><br><span class="line">        b = fir1(<span class="number">48</span>,[<span class="number">0.1</span>,<span class="number">0.3</span>]);</span><br><span class="line">    <span class="keyword">case</span> <span class="number">4</span></span><br><span class="line">        b = fir1(<span class="number">48</span>,[<span class="number">0.1</span>,<span class="number">0.3</span>],<span class="string">'stop'</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">x2= filter(b,<span class="number">1</span>,x1);</span><br><span class="line"></span><br><span class="line"><span class="comment">%------------------------自己写的fir1_fun 和 filter_fun</span></span><br><span class="line"><span class="keyword">switch</span> <span class="built_in">type</span> </span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span> </span><br><span class="line">        b2 = firl_fun(<span class="number">48</span>,<span class="number">0.1</span>,@hamming);</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span> </span><br><span class="line">        b2 = firl_fun(<span class="number">48</span>,<span class="number">0.1</span>,@hamming,<span class="string">'high'</span>);</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span></span><br><span class="line">        b2 = firl_fun(<span class="number">48</span>,[<span class="number">0.1</span>,<span class="number">0.3</span>],@hamming,<span class="string">'bandpass'</span>);</span><br><span class="line">    <span class="keyword">case</span> <span class="number">4</span></span><br><span class="line">        b2 = firl_fun(<span class="number">48</span>,[<span class="number">0.1</span>,<span class="number">0.3</span>],@hamming,<span class="string">'bandstop'</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">x3= filter_fun(b2,<span class="number">1</span>,x1);</span><br><span class="line"></span><br><span class="line"><span class="comment">%--------------------------（自带滤波器频域图）</span></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line">[h,w] = freqz(b,<span class="number">1</span>,<span class="number">512</span>);</span><br><span class="line"><span class="built_in">plot</span>(w/<span class="built_in">pi</span>,<span class="built_in">abs</span>(h),<span class="string">'linewidth'</span>,<span class="number">1</span>)</span><br><span class="line">title(<span class="string">"Matlab的滤波器频域图"</span>); </span><br><span class="line"><span class="comment">%--------------------------（自带滤波器处理后）</span></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>);</span><br><span class="line"><span class="built_in">plot</span>(t,x2);</span><br><span class="line">axis([<span class="number">0</span>, <span class="number">0.1</span>, <span class="number">-2</span>,<span class="number">2</span>]);</span><br><span class="line">title(<span class="string">"Matlab的滤波器处理后"</span>); </span><br><span class="line"></span><br><span class="line"><span class="comment">%--------------------------（编写的滤波器频域图）</span></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>);</span><br><span class="line">[h,w] = freqz(b2,<span class="number">1</span>,<span class="number">512</span>);</span><br><span class="line"><span class="built_in">plot</span>(w/<span class="built_in">pi</span>,<span class="built_in">abs</span>(h),<span class="string">'linewidth'</span>,<span class="number">1</span>)</span><br><span class="line">title(<span class="string">"自写的滤波器频域图"</span>); </span><br><span class="line"><span class="comment">%--------------------------（编写的滤波器处理后）</span></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">2</span>,<span class="number">6</span>);</span><br><span class="line"><span class="built_in">plot</span>(t,x3);</span><br><span class="line">axis([<span class="number">0</span>, <span class="number">0.1</span>, <span class="number">-2</span>,<span class="number">2</span>]);</span><br><span class="line">title(<span class="string">"自写的滤波器处理后"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="滤波器的实现"><a href="#滤波器的实现" class="headerlink" title="滤波器的实现"></a>滤波器的实现</h3><h4 id="原理分析-1"><a href="#原理分析-1" class="headerlink" title="原理分析"></a>原理分析</h4><p>按照Matlab的原理解释</p>
+<div align = center> <img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/Fir_filter.png"  style="zoom:70%;" />
+</div>
+
+
+<p>那实现就很简单了</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">y</span>= <span class="title">filter_fun</span><span class="params">(b,a,f)</span></span></span><br><span class="line"><span class="comment">%这个滤波实际上就是把现有数据当作输入，滤波公式当作系统传递函数</span></span><br><span class="line"><span class="comment">%FIR时，利用卷积求出系统响应就好了，所及这个就相当于一个卷积算法。</span></span><br><span class="line"><span class="comment">%FII时，利用就根据差分方程计算出来。</span></span><br><span class="line">n = <span class="built_in">length</span>(b);</span><br><span class="line">m = <span class="built_in">length</span>(f);</span><br><span class="line">na = <span class="built_in">length</span>(a)<span class="number">-1</span>;<span class="comment">%分母最高阶次数</span></span><br><span class="line">S = <span class="built_in">zeros</span>(<span class="number">1</span>,m);<span class="comment">%卷积结果存放</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%t=1:n-1 时为开头过度段，缺位补零相乘，求和时相当于没有该项</span></span><br><span class="line"><span class="comment">%t=n:m-1 时，按照卷积公式滑动求和</span></span><br><span class="line"><span class="comment">%t=m:m+n-1 时，时为尾部过度段，与 t=2:n 类似。</span></span><br><span class="line"><span class="keyword">for</span> t=<span class="number">1</span>:n<span class="number">-1</span></span><br><span class="line">    S(t) = sum(f(<span class="number">1</span>:t).*<span class="built_in">fliplr</span>(b(<span class="number">1</span>:t))) ;</span><br><span class="line">    <span class="keyword">if</span> na &gt;<span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> t &gt; na</span><br><span class="line">            S(t) = S(t) - sum( <span class="built_in">fliplr</span>(a(<span class="number">2</span>:na+<span class="number">1</span>)).*S(t<span class="number">-1</span>:t-na));</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            S(t) = S(t) - sum( <span class="built_in">fliplr</span>(a(<span class="number">2</span>:t)).*S(<span class="number">1</span>:t<span class="number">-1</span>));</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> t = n:m<span class="number">-1</span></span><br><span class="line">    S(t) = sum(f(t-n+<span class="number">1</span>:t).*<span class="built_in">fliplr</span>(b(<span class="number">1</span>:n)));</span><br><span class="line">    <span class="keyword">if</span> na &gt;<span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> t &gt; na</span><br><span class="line">            S(t) = S(t) - sum( <span class="built_in">fliplr</span>(a(<span class="number">2</span>:na+<span class="number">1</span>)).*S(t-na:t<span class="number">-1</span>));</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            S(t) = S(t) - sum( <span class="built_in">fliplr</span>(a(<span class="number">2</span>:t)).*S(<span class="number">1</span>:t<span class="number">-1</span>));</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span>    </span><br><span class="line">    </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">y = S;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="/introduction/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/logo-avator.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="/introduction/" target="_blank"><span class="text-dark">Liu_Yushen</span><small class="ml-1x">Engineer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/posts/MutualFunds/%E7%A9%B7%E5%AF%8C%E7%88%B8%E7%88%B8.html" title="读书笔记——《穷富爸爸》"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/posts/DSP/correlation_analysis_1.html" title="Matlab 自相关分析实现"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Liu-Yushen" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://space.bilibili.com/123821855" target="_blank" title="Bilibili" data-toggle=tooltip data-placement=top><i class="icon icon-bilibili"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2022 Yushen_L
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: true,
+    appId: 'JtEi77W9irt2uC5ebtRpOJB5-gzGzoHsz',
+    appKey: 'UEtSjUe18cyvpt5FLjobTkyM',
+    placeholder: '评价一下？',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
