@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/FIR_bandstop.png">
 <meta property="og:image" content="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/Fir_filter.png">
 <meta property="article:published_time" content="2020-11-06T10:30:20.000Z">
-<meta property="article:modified_time" content="2022-03-17T10:01:46.778Z">
+<meta property="article:modified_time" content="2022-03-24T11:16:35.422Z">
 <meta property="article:author" content="Yushen_L">
 <meta property="article:tag" content="信号处理">
 <meta property="article:tag" content="Matlab">
@@ -446,7 +446,7 @@
 <p>​        FIR(Finite Impulse Response)滤波器,即”有限长单位冲激响应滤波器”,其脉冲响应是有限的持续时间，并在有限的时间内稳定为零。</p>
 <p>其傅立叶系数h(n)实际上就是数字滤波器的冲击响应.</p>
 <script type="math/tex; mode=display">
-h(k)=a(k),k=0,1,2,...,N</script><p>其单边Z变he换为</p>
+h(k)=a(k),k=0,1,2,...,N</script><p>其单边Z变换为</p>
 <script type="math/tex; mode=display">
 H(z)=\sum^N_{k=0}{a_kZ^{-k}}</script><ul>
 <li><strong>低通滤波器</strong></li>
@@ -489,7 +489,7 @@ a_n &= -\frac{sin(n \pi v_1)} {n \pi};\ n=0;\pm1,\pm2,..,\infty
 
 a_0 &= v_2-v_1 \\
 a_n &= \frac{sin(n \pi v_2)-sin(n \pi v_1)}{n \pi};\ n=0;\pm1,\pm2,..,\infty
-\end{aligned}</script><p>由于h(k)可能是无限长序列，是物理不可实现的,为此要寻找一个h(n)，在相应的误差准则下最近逼近h(n)。</p>
+\end{aligned}</script><p>由于h(k)可能是无限长序列，是物理不可实现的,为此要寻找一个h(n)，在相应的误差准则下最近逼近h(k)。</p>
 <ul>
 <li><strong>带阻系数</strong></li>
 </ul>
