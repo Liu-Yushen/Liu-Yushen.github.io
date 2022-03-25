@@ -18,12 +18,12 @@
   
   
   <title>DML-管理数据（记录） | Yushen</title>
-  <meta name="description" content="插入数据使用insert into添加数据 123#方式一insert into TableName(column1,column2,...,columnN)values (value1,value2,...,valueN);  插入的值类型要与列的类型相同（或兼容）  在表中插入数据时，若没有指定某列，视为null；指定的列可以通过输入值输入null。若该列不允许null，则报错。额  输入过程">
+  <meta name="description" content="插入数据 使用insert into添加数据 123#方式一insert into TableName(column1,column2,...,columnN)values (value1,value2,...,valueN);   插入的值类型要与列的类型相同（或兼容）   在表中插入数据时，若没有指定某列，视为null；指定的列可以通过输入值输入null。若该列不允许null，则报错。额">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DML-管理数据（记录）">
 <meta property="og:url" content="http://yoursite.com/posts/database/DML_add.html">
 <meta property="og:site_name" content="Yushen&#39;s Note">
-<meta property="og:description" content="插入数据使用insert into添加数据 123#方式一insert into TableName(column1,column2,...,columnN)values (value1,value2,...,valueN);  插入的值类型要与列的类型相同（或兼容）  在表中插入数据时，若没有指定某列，视为null；指定的列可以通过输入值输入null。若该列不允许null，则报错。额  输入过程">
+<meta property="og:description" content="插入数据 使用insert into添加数据 123#方式一insert into TableName(column1,column2,...,columnN)values (value1,value2,...,valueN);   插入的值类型要与列的类型相同（或兼容）   在表中插入数据时，若没有指定某列，视为null；指定的列可以通过输入值输入null。若该列不允许null，则报错。额">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-06T15:00:00.000Z">
 <meta property="article:modified_time" content="2022-03-17T13:55:55.713Z">
@@ -427,14 +427,18 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h4 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h4><p>使用<code>insert into</code>添加数据</p>
+        <h4 id="插入数据"><a class="markdownIt-Anchor" href="#插入数据"></a> 插入数据</h4>
+<p>使用<code>insert into</code>添加数据</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#方式一</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> TableName(column1,column2,...,columnN)</span><br><span class="line"><span class="keyword">values</span> (value1,value2,...,valueN);</span><br></pre></td></tr></table></figure>
 <ol>
-<li><p>插入的值类型要与列的类型相同（或兼容）</p>
+<li>
+<p>插入的值类型要与列的类型相同（或兼容）</p>
 </li>
-<li><p>在表中插入数据时，若没有指定某列，视为<code>null</code>；指定的列可以通过输入值输入<code>null</code>。若该列不允许<code>null</code>，则报错。额</p>
+<li>
+<p>在表中插入数据时，若没有指定某列，视为<code>null</code>；指定的列可以通过输入值输入<code>null</code>。若该列不允许<code>null</code>，则报错。额</p>
 </li>
-<li><p>输入过程中，指定列的顺序不要求与表中顺序一致。省略列名时，默认按照表中列的顺序依次输入。</p>
+<li>
+<p>输入过程中，指定列的顺序不要求与表中顺序一致。省略列名时，默认按照表中列的顺序依次输入。</p>
 <p>示例：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> beauty</span><br><span class="line"><span class="keyword">values</span> (<span class="number">18</span>,<span class="string">'张飞'</span>,<span class="string">'男'</span>,<span class="literal">null</span>,<span class="string">'119'</span>,<span class="literal">null</span>,<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">#包含子查询</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> beauty(<span class="keyword">name</span>,phone)</span><br><span class="line">	<span class="keyword">select</span> boyName,<span class="string">'110'</span></span><br><span class="line">	<span class="keyword">from</span> boys </span><br><span class="line">	<span class="keyword">where</span> <span class="keyword">id</span>&lt;<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
 </li>
@@ -445,29 +449,33 @@
 </ul>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#方式二(使用较少)</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> TableName</span><br><span class="line"><span class="keyword">set</span> column1=value1,...,columnN=valueN;</span><br></pre></td></tr></table></figure>
-<hr>
-<h4 id="更改数据"><a href="#更改数据" class="headerlink" title="更改数据"></a>更改数据</h4><p><strong>单表修改</strong></p>
+<hr />
+<h4 id="更改数据"><a class="markdownIt-Anchor" href="#更改数据"></a> 更改数据</h4>
+<p><strong>单表修改</strong></p>
 <p>基本语法：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> TableName</span><br><span class="line"><span class="keyword">set</span> column1=value1,...,columnN=valueN</span><br><span class="line"><span class="keyword">where</span> condition_statement</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>示例：</p>
+<li>
+<p>示例：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> sql_safe_updates = <span class="number">0</span>;    </span><br><span class="line"><span class="keyword">update</span> beauty</span><br><span class="line"><span class="keyword">set</span> phone = <span class="string">'13888888'</span></span><br><span class="line"><span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">like</span> <span class="string">'张%'</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <blockquote>
 <p>当数据库处于安全保护模式下，修改数据将报错，可通过命令<code>set sql_safe_updates = 0;</code>关闭安全模式</p>
 </blockquote>
-<p> <strong>多表修改</strong></p>
+<p><strong>多表修改</strong></p>
 <p>根据一个表的信息，修改另外一个表的数据</p>
 <p>基本语法：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#99语法</span></span><br><span class="line"><span class="keyword">update</span> TableName1</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> TableName2</span><br><span class="line"><span class="keyword">on</span> connect_condition</span><br><span class="line"><span class="keyword">set</span> column1=value1,...,columnN=valueN</span><br><span class="line"><span class="keyword">where</span> condition_statement</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>示例：</p>
+<li>
+<p>示例：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将张无忌的cp的电话修改为114</span></span><br><span class="line"><span class="keyword">update</span> boys bo</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> beauty b</span><br><span class="line"><span class="keyword">on</span> b.boyfriend_id = bo.id</span><br><span class="line"><span class="keyword">set</span> b.phone = <span class="string">'114'</span></span><br><span class="line"><span class="keyword">where</span> bo.boyName = <span class="string">'张无忌'</span>;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<hr>
-<h4 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h4><p><strong>单表删除数据</strong></p>
+<hr />
+<h4 id="删除数据"><a class="markdownIt-Anchor" href="#删除数据"></a> 删除数据</h4>
+<p><strong>单表删除数据</strong></p>
 <p>基本语法：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#方式一</span></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> TableName</span><br><span class="line"><span class="keyword">where</span> condition_statement <span class="comment">#无条件时，整表删除</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#方式二</span></span><br><span class="line"><span class="keyword">truncate</span> TableName <span class="comment">#整表删除</span></span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -479,7 +487,8 @@
 </ul>
 </blockquote>
 <ul>
-<li><p>示例：</p>
+<li>
+<p>示例：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> beauty</span><br><span class="line"><span class="keyword">where</span> phone <span class="keyword">like</span> <span class="string">'%9%'</span>;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -488,7 +497,8 @@
 <p>基本语法：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#99语法</span></span><br><span class="line"><span class="keyword">delete</span> TableNames <span class="comment">#delete后应写需要删除数据的所有表的表名</span></span><br><span class="line"><span class="keyword">from</span> TableName1</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> TableName2</span><br><span class="line"><span class="keyword">on</span> connect_condition</span><br><span class="line"><span class="keyword">where</span> condition_statement</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>示例：</p>
+<li>
+<p>示例：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#删除黄晓明及其cp的信息</span></span><br><span class="line"><span class="keyword">delete</span> b,bo</span><br><span class="line"><span class="keyword">from</span> beauty b</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> boys bo</span><br><span class="line"><span class="keyword">on</span> b.boyfriend_id = bo.id</span><br><span class="line"><span class="keyword">where</span> bo.boyName = <span class="string">'黄晓明'</span>;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>

@@ -18,12 +18,12 @@
   
   
   <title>MYSQL安装 | Yushen</title>
-  <meta name="description" content="软件安装 官网：https:&#x2F;&#x2F;www.mysql.com&#x2F; ，选择DownLoads &gt;&gt; Community社区版 &gt;&gt; Installer   打开安装包，选择自定义安装(Custom)，添加server，点击Options可更改安装路径  配置：选用开发机，默认端口（3306），next。输入root用户密码，设置服务名。">
+  <meta name="description" content="软件安装   官网：https:&#x2F;&#x2F;www.mysql.com&#x2F; ，选择DownLoads &gt;&gt; Community社区版 &gt;&gt; Installer   打开安装包，选择自定义安装(Custom)，添加server，点击Options可更改安装路径   配置：选用开发机，默认端口（3306），next。输入root用户密码，设置服务名。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MYSQL安装">
 <meta property="og:url" content="http://yoursite.com/posts/database/MYSQL_start.html">
 <meta property="og:site_name" content="Yushen&#39;s Note">
-<meta property="og:description" content="软件安装 官网：https:&#x2F;&#x2F;www.mysql.com&#x2F; ，选择DownLoads &gt;&gt; Community社区版 &gt;&gt; Installer   打开安装包，选择自定义安装(Custom)，添加server，点击Options可更改安装路径  配置：选用开发机，默认端口（3306），next。输入root用户密码，设置服务名。">
+<meta property="og:description" content="软件安装   官网：https:&#x2F;&#x2F;www.mysql.com&#x2F; ，选择DownLoads &gt;&gt; Community社区版 &gt;&gt; Installer   打开安装包，选择自定义安装(Custom)，添加server，点击Options可更改安装路径   配置：选用开发机，默认端口（3306），next。输入root用户密码，设置服务名。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/mysql_download_1.png">
 <meta property="og:image" content="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/mysql_download_2.png">
@@ -433,36 +433,44 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h4 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h4><ul>
-<li><p>官网：<a href="https://www.mysql.com/" target="_blank" rel="noopener">https://www.mysql.com/</a> ，选择DownLoads &gt;&gt; Community社区版 &gt;&gt; Installer </p>
+        <h4 id="软件安装"><a class="markdownIt-Anchor" href="#软件安装"></a> 软件安装</h4>
+<ul>
+<li>
+<p>官网：<a href="https://www.mysql.com/" target="_blank" rel="noopener">https://www.mysql.com/</a> ，选择DownLoads &gt;&gt; Community社区版 &gt;&gt; Installer</p>
 </li>
-<li><p>打开安装包，选择自定义安装(Custom)，添加server，点击Options可更改安装路径</p>
+<li>
+<p>打开安装包，选择自定义安装(Custom)，添加server，点击Options可更改安装路径</p>
 </li>
-<li><p>配置：选用开发机，默认端口（3306），next。输入root用户密码，设置服务名。</p>
+<li>
+<p>配置：选用开发机，默认端口（3306），next。输入root用户密码，设置服务名。</p>
 <center> <figure> 
   <img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img\mysql_download_1.png" style="zoom:30%"/> 
     <img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img\mysql_download_2.png" style="zoom:30%" /> 
     <img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img\mysql_download_3.png" style="zoom:30%" /> 
 </figure> </center>
 </li>
-<li><p>环境变量：复制bin路径，如<code>C:\Program Files\MySQL\MySQL Server 8.0\bin</code></p>
+<li>
+<p>环境变量：复制bin路径，如<code>C:\Program Files\MySQL\MySQL Server 8.0\bin</code></p>
 <p>右击计算机 &gt;&gt; 属性 &gt;&gt;高级系统设置 &gt;&gt;高级&gt;&gt;环境变量&gt;&gt;新建，粘贴</p>
-<p><img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/mysql_download_4.png" width="400"></p>
+<img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/mysql_download_4.png" width="400">
 </li>
-<li><p>安装图形化界面</p>
+<li>
+<p>安装图形化界面</p>
 <ul>
 <li>通过官网安装 / 通过Installer&gt;&gt;add&gt;&gt;workbench 安装</li>
 <li>一般会自动识别账户，若没有点击+号自行设置</li>
 </ul>
-<p><img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img\mysql_download_5.png" width="500"></p>
+<img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img\mysql_download_5.png" width="500">
 </li>
 </ul>
-<hr>
-<h4 id="启动-停止服务"><a href="#启动-停止服务" class="headerlink" title="启动/停止服务"></a>启动/停止服务</h4><p>通过电脑-&gt;管理-&gt;服务和管理-&gt;服务-&gt;启动MySQL服务</p>
-<p>通过命令行启动服务 </p>
+<hr />
+<h4 id="启动停止服务"><a class="markdownIt-Anchor" href="#启动停止服务"></a> 启动/停止服务</h4>
+<p>通过电脑-&gt;管理-&gt;服务和管理-&gt;服务-&gt;启动MySQL服务</p>
+<p>通过命令行启动服务</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; net start mysqlname</span><br><span class="line">&gt; net <span class="built_in">stop</span> mysqlname</span><br></pre></td></tr></table></figure>
-<h4 id="登录-退出服务端"><a href="#登录-退出服务端" class="headerlink" title="登录/退出服务端"></a>登录/退出服务端</h4><p>通过客户端-&gt;输入密码</p>
-<p>通过命令行：<code>mysql</code> -h 主机名 -P 端口号 -u 用户 -p 密码 </p>
+<h4 id="登录退出服务端"><a class="markdownIt-Anchor" href="#登录退出服务端"></a> 登录/退出服务端</h4>
+<p>通过客户端-&gt;输入密码</p>
+<p>通过命令行：<code>mysql</code> -h 主机名 -P 端口号 -u 用户 -p 密码</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; mysql -h localhost -P <span class="number">3306</span> -u root - p</span><br><span class="line">&gt; passwords</span><br></pre></td></tr></table></figure>
 
       

@@ -18,12 +18,12 @@
   
   
   <title>C++Primer 16章·11-20 | Yushen</title>
-  <meta name="description" content="16.11 List的定义是错误的，应该如何修正？修改后： 123456789101112template &lt;typename elemType&gt; class ListItem;template &lt;typename elemType&gt; class List &amp;#123;public:	List();&#x2F;&#x2F;在List模板内调用List可以省略&lt;&gt;	List(cons">
+  <meta name="description" content="16.11 List的定义是错误的，应该如何修正？ 修改后： 123456789101112template &lt;typename elemType&gt; class ListItem;template &lt;typename elemType&gt; class List &amp;#123;public:	List();&#x2F;&#x2F;在List模板内调用List可以省略&lt;&gt;	List(co">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++Primer 16章·11-20">
 <meta property="og:url" content="http://yoursite.com/posts/cpp/cpp-16-2.html">
 <meta property="og:site_name" content="Yushen&#39;s Note">
-<meta property="og:description" content="16.11 List的定义是错误的，应该如何修正？修改后： 123456789101112template &lt;typename elemType&gt; class ListItem;template &lt;typename elemType&gt; class List &amp;#123;public:	List();&#x2F;&#x2F;在List模板内调用List可以省略&lt;&gt;	List(cons">
+<meta property="og:description" content="16.11 List的定义是错误的，应该如何修正？ 修改后： 123456789101112template &lt;typename elemType&gt; class ListItem;template &lt;typename elemType&gt; class List &amp;#123;public:	List();&#x2F;&#x2F;在List模板内调用List可以省略&lt;&gt;	List(co">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-09T01:09:17.000Z">
 <meta property="article:modified_time" content="2022-03-17T10:01:46.787Z">
@@ -426,9 +426,11 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h4 id="16-11-List的定义是错误的，应该如何修正？"><a href="#16-11-List的定义是错误的，应该如何修正？" class="headerlink" title="16.11 List的定义是错误的，应该如何修正？"></a>16.11 List的定义是错误的，应该如何修正？</h4><p>修改后：</p>
+        <h4 id="1611-list的定义是错误的应该如何修正"><a class="markdownIt-Anchor" href="#1611-list的定义是错误的应该如何修正"></a> 16.11 List的定义是错误的，应该如何修正？</h4>
+<p>修改后：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> elemType&gt; <span class="class"><span class="keyword">class</span> <span class="title">ListItem</span>;</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> elemType&gt; <span class="class"><span class="keyword">class</span> <span class="title">List</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	List();<span class="comment">//在List模板内调用List可以省略&lt;&gt;</span></span><br><span class="line">	List(<span class="keyword">const</span> List&lt;elemType&gt; &amp;);</span><br><span class="line">	List&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> List&lt;elemType&gt;&amp;);</span><br><span class="line">	~List();</span><br><span class="line">	<span class="comment">//ListItem在模板类定义外调用需要加上&lt;&gt;</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(ListItem&lt;elemType&gt;* ptr, elemType value)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	ListItem * front, * <span class="built_in">end</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h4 id="16-12-编写你自己版本的Blob和BlobPtr，包含书中未定义的多个const"><a href="#16-12-编写你自己版本的Blob和BlobPtr，包含书中未定义的多个const" class="headerlink" title="16.12 编写你自己版本的Blob和BlobPtr，包含书中未定义的多个const"></a>16.12 编写你自己版本的Blob和BlobPtr，包含书中未定义的多个const</h4><blockquote>
+<h4 id="1612-编写你自己版本的blob和blobptr包含书中未定义的多个const"><a class="markdownIt-Anchor" href="#1612-编写你自己版本的blob和blobptr包含书中未定义的多个const"></a> 16.12 编写你自己版本的Blob和BlobPtr，包含书中未定义的多个const</h4>
+<blockquote>
 <p>这道题涉及到新学的<strong>模板类的定义</strong>和<strong>模板友元的声明</strong>以及之前学到的<strong>const类型函数</strong>、<strong>智能指针</strong>、<strong>运算符重载</strong>等内容。如果跟我一样战线拉得比较长得同学可以试着重写以下这个Blob。如果之前学得比较好的话，可以直接从<strong>12章-19题</strong>的<code>Strbol.h</code>改成<code>template</code>模板熟悉一下模板的声明。程序如下：</p>
 </blockquote>
 <p>blob.h</p>

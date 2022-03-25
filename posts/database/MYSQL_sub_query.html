@@ -18,12 +18,12 @@
   
   
   <title>SQL-子查询 | Yushen</title>
-  <meta name="description" content="子查询基本语法 子查询可放于select，from，where，having，exists（相关子查询）后   子查询放于小括号内   子查询又可分为相关子查询与非相关子查询 相关子查询一般放置于where、having之后，需要从外部查询获取结果，其一般执行多次。     非相关子查询与外部查询相互独立，一般仅执行一次。  放置于where、having后支持：标量子查询（单行子查询）、列子查询">
+  <meta name="description" content="子查询基本语法  子查询可放于select，from，where，having，exists（相关子查询）后   子查询放于小括号内   子查询又可分为相关子查询与非相关子查询   相关子查询一般放置于where、having之后，需要从外部查询获取结果，其一般执行多次。   非相关子查询与外部查询相互独立，一般仅执行一次。      放置于where、having后 支持：标量子查询（单行子查">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL-子查询">
 <meta property="og:url" content="http://yoursite.com/posts/database/MYSQL_sub_query.html">
 <meta property="og:site_name" content="Yushen&#39;s Note">
-<meta property="og:description" content="子查询基本语法 子查询可放于select，from，where，having，exists（相关子查询）后   子查询放于小括号内   子查询又可分为相关子查询与非相关子查询 相关子查询一般放置于where、having之后，需要从外部查询获取结果，其一般执行多次。     非相关子查询与外部查询相互独立，一般仅执行一次。  放置于where、having后支持：标量子查询（单行子查询）、列子查询">
+<meta property="og:description" content="子查询基本语法  子查询可放于select，from，where，having，exists（相关子查询）后   子查询放于小括号内   子查询又可分为相关子查询与非相关子查询   相关子查询一般放置于where、having之后，需要从外部查询获取结果，其一般执行多次。   非相关子查询与外部查询相互独立，一般仅执行一次。      放置于where、having后 支持：标量子查询（单行子查">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-28T07:25:00.000Z">
 <meta property="article:modified_time" content="2022-03-17T13:52:54.339Z">
@@ -427,22 +427,27 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h4 id="子查询基本语法"><a href="#子查询基本语法" class="headerlink" title="子查询基本语法"></a>子查询基本语法</h4><ul>
+        <h4 id="子查询基本语法"><a class="markdownIt-Anchor" href="#子查询基本语法"></a> 子查询基本语法</h4>
+<ul>
 <li>子查询可放于<code>select</code>，<code>from</code>，<code>where</code>，<code>having</code>，<code>exists</code>（相关子查询）后</li>
 </ul>
 <ol>
 <li>子查询放于小括号内</li>
 </ol>
 <ul>
-<li>子查询又可分为<strong>相关子查询</strong>与<strong>非相关子查询</strong><ul>
-<li>相关子查询一般放置于where、having之后，需要从外部查询获取结果，其一般执行多次。</li>
+<li>子查询又可分为<strong>相关子查询</strong>与<strong>非相关子查询</strong>
+<ul>
+<li>
+<p>相关子查询一般放置于where、having之后，需要从外部查询获取结果，其一般执行多次。</p>
+</li>
+<li>
+<p>非相关子查询与外部查询相互独立，一般仅执行一次。</p>
+</li>
 </ul>
 </li>
 </ul>
-<ul>
-<li>非相关子查询与外部查询相互独立，一般仅执行一次。</li>
-</ul>
-<h4 id="放置于where、having后"><a href="#放置于where、having后" class="headerlink" title="放置于where、having后"></a><strong>放置于<code>where</code>、<code>having</code>后</strong></h4><p>支持：标量子查询（单行子查询）、列子查询（多行子查询）、行子查询</p>
+<h4 id="放置于where-having后"><a class="markdownIt-Anchor" href="#放置于where-having后"></a> <strong>放置于<code>where</code>、<code>having</code>后</strong></h4>
+<p>支持：标量子查询（单行子查询）、列子查询（多行子查询）、行子查询</p>
 <blockquote>
 <ol>
 <li>此时子查询一般放在条件的右侧。</li>
@@ -450,14 +455,16 @@
 </ol>
 </blockquote>
 <ul>
-<li><p>标量子查询</p>
+<li>
+<p>标量子查询</p>
 <p>示例：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查询最低工资大于50号部门最低工资的部门id及其最低工资</span></span><br><span class="line"><span class="keyword">select</span>  department_id, <span class="keyword">min</span>(salary) </span><br><span class="line"><span class="keyword">from</span> employees</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> department_id</span><br><span class="line"><span class="keyword">having</span> <span class="keyword">min</span>(salary)&gt; (</span><br><span class="line">    <span class="keyword">select</span> <span class="keyword">min</span>(salary)</span><br><span class="line">	<span class="keyword">from</span> employees </span><br><span class="line">	<span class="keyword">where</span> department_id =<span class="number">50</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>注意：对分组后的数据进行筛选使用 having</p>
 </blockquote>
 </li>
-<li><p>列子查询</p>
+<li>
+<p>列子查询</p>
 <ul>
 <li>使用 <code>in</code> 修饰列子查询结果，返回符合列子查询结果的元素。</li>
 <li>使用 <code>any/some</code> 修饰列子查询结果，将查询列表与列子查询结果依次对比，返回存在一次比较满足要求的结果。</li>
@@ -470,12 +477,14 @@
 </blockquote>
 </li>
 </ul>
-<h4 id="放置于from后"><a href="#放置于from后" class="headerlink" title="放置于from后"></a><strong>放置于<code>from</code>后</strong></h4><p>支持：表子查询 </p>
+<h4 id="放置于from后"><a class="markdownIt-Anchor" href="#放置于from后"></a> <strong>放置于<code>from</code>后</strong></h4>
+<p>支持：表子查询</p>
 <blockquote>
-<p>子查询一般为非相关子查询，结果作为一个虚拟表返回给外部查询。 </p>
+<p>子查询一般为非相关子查询，结果作为一个虚拟表返回给外部查询。</p>
 </blockquote>
 <ul>
-<li><p>示例</p>
+<li>
+<p>示例</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查询各部门信息及员工人数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#方式一,非相关子查询</span></span><br><span class="line"><span class="keyword">select</span> d.* ,<span class="keyword">ifnull</span>(c,<span class="number">0</span>) <span class="keyword">num</span></span><br><span class="line"><span class="keyword">from</span> departments d</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> (</span><br><span class="line">	<span class="keyword">select</span> department_id,<span class="keyword">count</span>(*) c</span><br><span class="line">	<span class="keyword">from</span> employees</span><br><span class="line">	<span class="keyword">group</span> <span class="keyword">by</span> department_id) n</span><br><span class="line"><span class="keyword">on</span> n.department_id = d.department_id;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>此时子查询必须要添加别名（虚拟表的表名）</p>

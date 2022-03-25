@@ -18,12 +18,12 @@
   
   
   <title>DDL-约束介绍 | Yushen</title>
-  <meta name="description" content="约束用于限制表中数据，确保数据的可靠性 常见约束              类型         功能                   not null         非空约束，保证数据不为null                   default         默认约束，在不输入时保证字段有默认值                   primary key         主键，保证字">
+  <meta name="description" content="约束用于限制表中数据，确保数据的可靠性  常见约束               类型         功能                   not null         非空约束，保证数据不为null                   default         默认约束，在不输入时保证字段有默认值                   primary key         主键，保">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DDL-约束介绍">
 <meta property="og:url" content="http://yoursite.com/posts/database/DDL_constraint.html">
 <meta property="og:site_name" content="Yushen&#39;s Note">
-<meta property="og:description" content="约束用于限制表中数据，确保数据的可靠性 常见约束              类型         功能                   not null         非空约束，保证数据不为null                   default         默认约束，在不输入时保证字段有默认值                   primary key         主键，保证字">
+<meta property="og:description" content="约束用于限制表中数据，确保数据的可靠性  常见约束               类型         功能                   not null         非空约束，保证数据不为null                   default         默认约束，在不输入时保证字段有默认值                   primary key         主键，保">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-07T08:00:17.000Z">
 <meta property="article:modified_time" content="2022-03-17T14:02:20.109Z">
@@ -428,7 +428,8 @@
     <div class="article-entry marked-body" itemprop="articleBody">
       
         <p>约束用于限制表中数据，确保数据的可靠性</p>
-<h4 id="常见约束"><a href="#常见约束" class="headerlink" title="常见约束"></a>常见约束</h4><table>
+<h4 id="常见约束"><a class="markdownIt-Anchor" href="#常见约束"></a> 常见约束</h4>
+<table>
     <tr>
         <td>类型</td>
         <td>功能</td>
@@ -458,23 +459,26 @@
         <td>检查，用于对字段值添加限制（mysql中不支持：无效但不报错）</td>
     </tr>
 </table>
-
-
-<hr>
-<h4 id="添加约束"><a href="#添加约束" class="headerlink" title="添加约束"></a>添加约束</h4><h5 id="创建表时添加"><a href="#创建表时添加" class="headerlink" title="创建表时添加"></a>创建表时添加</h5><p>基本语法：</p>
+<hr />
+<h4 id="添加约束"><a class="markdownIt-Anchor" href="#添加约束"></a> 添加约束</h4>
+<h5 id="创建表时添加"><a class="markdownIt-Anchor" href="#创建表时添加"></a> 创建表时添加</h5>
+<p>基本语法：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> TableName(</span><br><span class="line">	column1 type1 constraint1, <span class="comment">#此时constraint1、2为列约束</span></span><br><span class="line">    column2 type2 constraint2,</span><br><span class="line">    <span class="keyword">constraint</span> constName constType [<span class="keyword">references</span> Table1(column3)] <span class="comment">#此时constName为表约束</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><code>[]</code>内类容为使用<code>foreign key</code>时需要添加的关联列</p>
 </blockquote>
 <ol>
-<li><p>列级约束，所有约束均可按照列级约束添加，但<code>foreign key</code>外键约束无效。</p>
+<li>
+<p>列级约束，所有约束均可按照列级约束添加，但<code>foreign key</code>外键约束无效。</p>
 </li>
-<li><p>表级约束：除<code>not null</code>、<code>default</code>外的约束，均可作为表级约束。</p>
+<li>
+<p>表级约束：除<code>not null</code>、<code>default</code>外的约束，均可作为表级约束。</p>
 <p>示例：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> students;</span><br><span class="line"><span class="keyword">use</span> students;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> major(</span><br><span class="line">	<span class="keyword">id</span> <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    majorName <span class="built_in">varchar</span>(<span class="number">20</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">#列级约束</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> stuinfo(</span><br><span class="line">	<span class="keyword">id</span> <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">    stuName <span class="built_in">varchar</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    gender <span class="built_in">char</span>(<span class="number">1</span>) <span class="keyword">check</span>(gender=<span class="string">'男'</span> <span class="keyword">or</span> gender=<span class="string">'女'</span>),<span class="comment">#mysql中无效</span></span><br><span class="line">    seat <span class="built_in">int</span> <span class="keyword">unique</span>,</span><br><span class="line">    age <span class="built_in">int</span> <span class="keyword">default</span> <span class="number">18</span>,</span><br><span class="line">    majorId <span class="built_in">int</span> <span class="keyword">references</span> major(<span class="keyword">id</span>) <span class="comment">#此处列级外键无效</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">#表级约束</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> stuinfo(</span><br><span class="line">	<span class="keyword">id</span> <span class="built_in">int</span> ,</span><br><span class="line">    stuName <span class="built_in">varchar</span>(<span class="number">20</span>) ,</span><br><span class="line">    gender <span class="built_in">char</span>(<span class="number">1</span>) ,</span><br><span class="line">    seat <span class="built_in">int</span> ,</span><br><span class="line">    age <span class="built_in">int</span> ,</span><br><span class="line">    majorId <span class="built_in">int</span>,  </span><br><span class="line">    <span class="keyword">constraint</span> pk primary <span class="keyword">key</span>(<span class="keyword">id</span>),</span><br><span class="line">    <span class="keyword">constraint</span> uq <span class="keyword">unique</span>(seat),</span><br><span class="line">    <span class="keyword">constraint</span> ck <span class="keyword">check</span>(gender=<span class="string">'男'</span> <span class="keyword">or</span> gender=<span class="string">'女'</span>),</span><br><span class="line">    <span class="keyword">constraint</span> fk_stu_major <span class="keyword">foreign</span> <span class="keyword">key</span>(majorid)  <span class="keyword">references</span> major(<span class="keyword">id</span>) </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h5 id="在修改过程中添加、删除"><a href="#在修改过程中添加、删除" class="headerlink" title="在修改过程中添加、删除"></a>在修改过程中添加、删除</h5><ul>
+<h5 id="在修改过程中添加-删除"><a class="markdownIt-Anchor" href="#在修改过程中添加-删除"></a> 在修改过程中添加、删除</h5>
+<ul>
 <li>添加约束语法</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#约束添加</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> tablename <span class="keyword">modify</span> <span class="keyword">column</span> column1 <span class="keyword">type</span> constraint1;<span class="comment">#添加列级约束</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> tablename <span class="keyword">add</span>  constraint1(<span class="keyword">column</span>); <span class="comment">#添加表级约束</span></span><br></pre></td></tr></table></figure>
@@ -482,7 +486,8 @@
 <p>其中<code>constraint1</code>代表对应约束语句，具体格式见上文</p>
 </blockquote>
 <ul>
-<li><p>删除约束语法</p>
+<li>
+<p>删除约束语法</p>
 <p>列级约束删除</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#删除非空约束</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> TableName <span class="keyword">modify</span> <span class="keyword">column</span> CloumnName <span class="keyword">type</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除默认约束</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> TableName <span class="keyword">modify</span> <span class="keyword">column</span> CloumnName <span class="keyword">type</span>;</span><br></pre></td></tr></table></figure>
 <p>表级约束删除</p>
@@ -492,17 +497,22 @@
 </blockquote>
 </li>
 </ul>
-<h5 id="特别注意"><a href="#特别注意" class="headerlink" title="特别注意"></a>特别注意</h5><ul>
-<li><p>主键</p>
+<h5 id="特别注意"><a class="markdownIt-Anchor" href="#特别注意"></a> 特别注意</h5>
 <ul>
-<li><p>同一个表中，<code>unique</code>可以有多个，但<code>primary key</code>只能有一个</p>
+<li>
+<p>主键</p>
+<ul>
+<li>
+<p>同一个表中，<code>unique</code>可以有多个，但<code>primary key</code>只能有一个</p>
 </li>
-<li><p>可以将多个列组合成一个主键，其格式如</p>
+<li>
+<p>可以将多个列组合成一个主键，其格式如</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">constraint pk primary key(column1,column2)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
-<li><p>外键</p>
+<li>
+<p>外键</p>
 <ul>
 <li>在从表中设置外键关系</li>
 <li>从表列于主表关联列的类型要相同（或者兼容）</li>
@@ -510,8 +520,9 @@
 </ul>
 </li>
 </ul>
-<hr>
-<h4 id="标识列"><a href="#标识列" class="headerlink" title="标识列"></a>标识列</h4><p>与约束类似，在创建表时添加：</p>
+<hr />
+<h4 id="标识列"><a class="markdownIt-Anchor" href="#标识列"></a> 标识列</h4>
+<p>与约束类似，在创建表时添加：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置自增长标识列</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> TableName(</span><br><span class="line">	ColumnName <span class="keyword">type</span> <span class="keyword">unique</span> auto_increment,</span><br><span class="line">    ColumnName2 type2</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置增长步长</span></span><br><span class="line"><span class="keyword">set</span> auto_increment_increment = N;</span><br></pre></td></tr></table></figure>
 <p>在修改时添加、删除：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#添加标识列</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> tablename <span class="keyword">modify</span> <span class="keyword">column</span> column1 <span class="keyword">type</span> constraint1 auto_increment;</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除标识列（即修改后不添加标识）</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> TableName <span class="keyword">modify</span> <span class="keyword">column</span> CloumnName <span class="keyword">type</span> constraint1;</span><br></pre></td></tr></table></figure>

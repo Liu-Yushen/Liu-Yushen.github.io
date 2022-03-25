@@ -18,12 +18,12 @@
   
   
   <title>DDL-表管理 | Yushen</title>
-  <meta name="description" content="创建表基本语法: 123456create table [if not exists] Table_Name(    ColumnName1 Type[(length) constraint1 ]    ColumnName2 Type[(length) constraint2 ]    ColumnName3 Type[(length) constraint3 ]    ...);  []内语句">
+  <meta name="description" content="创建表 基本语法: 123456create table [if not exists] Table_Name(    ColumnName1 Type[(length) constraint1 ]    ColumnName2 Type[(length) constraint2 ]    ColumnName3 Type[(length) constraint3 ]    ...);  []内">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DDL-表管理">
 <meta property="og:url" content="http://yoursite.com/posts/database/DDL_database.html">
 <meta property="og:site_name" content="Yushen&#39;s Note">
-<meta property="og:description" content="创建表基本语法: 123456create table [if not exists] Table_Name(    ColumnName1 Type[(length) constraint1 ]    ColumnName2 Type[(length) constraint2 ]    ColumnName3 Type[(length) constraint3 ]    ...);  []内语句">
+<meta property="og:description" content="创建表 基本语法: 123456create table [if not exists] Table_Name(    ColumnName1 Type[(length) constraint1 ]    ColumnName2 Type[(length) constraint2 ]    ColumnName3 Type[(length) constraint3 ]    ...);  []内">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-06T12:30:00.000Z">
 <meta property="article:modified_time" content="2022-03-17T13:59:14.510Z">
@@ -427,25 +427,31 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><p>基本语法:</p>
+        <h4 id="创建表"><a class="markdownIt-Anchor" href="#创建表"></a> 创建表</h4>
+<p>基本语法:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> [<span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span>] Table_Name(</span><br><span class="line">    ColumnName1 <span class="keyword">Type</span>[(<span class="keyword">length</span>) constraint1 ]</span><br><span class="line">    ColumnName2 <span class="keyword">Type</span>[(<span class="keyword">length</span>) constraint2 ]</span><br><span class="line">    ColumnName3 <span class="keyword">Type</span>[(<span class="keyword">length</span>) constraint3 ]</span><br><span class="line">    ...</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><code>[]</code>内语句为可选语句，<code>()</code>符号不可省略</p>
 <p>注意：当Type为数据类型时，()内数字指显示长度，而不是字节长度</p>
 </blockquote>
 <ul>
-<li><p>示例：</p>
+<li>
+<p>示例：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> book(</span><br><span class="line">	<span class="keyword">id</span> <span class="built_in">int</span>,</span><br><span class="line">    bName <span class="built_in">varchar</span>(<span class="number">20</span>),</span><br><span class="line">    price <span class="keyword">double</span>,</span><br><span class="line">    authorId <span class="built_in">int</span>,</span><br><span class="line">    publishDate datetime</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h4><ul>
-<li><p>修改列名</p>
+<h4 id="修改表"><a class="markdownIt-Anchor" href="#修改表"></a> 修改表</h4>
+<ul>
+<li>
+<p>修改列名</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> TableName <span class="keyword">change</span> <span class="keyword">column</span> columnName New_columnName <span class="keyword">Type</span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>修改列的类型或约束</p>
+<li>
+<p>修改列的类型或约束</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> TableName <span class="keyword">modify</span> <span class="keyword">column</span> columnName <span class="keyword">Type</span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>添加列、删除列</p>
+<li>
+<p>添加列、删除列</p>
 <ul>
 <li>添加</li>
 </ul>
@@ -455,26 +461,32 @@
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> TableName <span class="keyword">drop</span> <span class="keyword">column</span> columnName;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>修改表名</p>
+<li>
+<p>修改表名</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> TableName <span class="keyword">rename</span> <span class="keyword">to</span> New_TableName;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="复制表"><a href="#复制表" class="headerlink" title="复制表"></a>复制表</h4><ul>
-<li><p>复制表格结构</p>
+<h4 id="复制表"><a class="markdownIt-Anchor" href="#复制表"></a> 复制表</h4>
+<ul>
+<li>
+<p>复制表格结构</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> Copy_Table <span class="keyword">like</span> TableName;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>创建一个结构与<code>TableName</code>相同的表Copy_Table</p>
 </blockquote>
 </li>
-<li><p>复制表格结构及数据</p>
+<li>
+<p>复制表格结构及数据</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> Copy_Table </span><br><span class="line">	<span class="keyword">select</span> * <span class="keyword">from</span> TableName;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>通过子查询的方式获取<code>TableName</code>中的数据（可通过<code>where</code>等对表格数据处理后复制）</p>
 </blockquote>
 </li>
 </ul>
-<h4 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a><strong>删除表</strong></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> [<span class="keyword">if</span> <span class="keyword">exists</span>] TableName;</span><br></pre></td></tr></table></figure>
-<h4 id=""><a href="#" class="headerlink" title=" "></a> </h4>
+<h4 id="删除表"><a class="markdownIt-Anchor" href="#删除表"></a> <strong>删除表</strong></h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> [<span class="keyword">if</span> <span class="keyword">exists</span>] TableName;</span><br></pre></td></tr></table></figure>
+<h4 id=""><a class="markdownIt-Anchor" href="#"></a> </h4>
+
       
     </div>
     <div class="article-footer">

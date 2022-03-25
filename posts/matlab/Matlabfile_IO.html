@@ -18,12 +18,12 @@
   
   
   <title>Matlab数据文件读/写 | Yushen</title>
-  <meta name="description" content="测试数据经常使用 matal 进行处理，在此保存一份读&#x2F;写文件模板方便以后使用  基本操作过程1.测试数据读入采集卡得到的的数据大部分可以以.txt文件列向量的形式得到，删除数据描述部分后，可以使用以下语句读入为列向量。 1[x,y]&#x3D;textread(&#39;Path&#39;,&#39; %f %f&#39;); 2.数据处理之后可以通过不同的处理手段，对数据进行（不限于）以下的操作  数值处理 图像绘制  3.数据导出">
+  <meta name="description" content="测试数据经常使用 matal 进行处理，在此保存一份读&#x2F;写文件模板方便以后使用   基本操作过程  1.测试数据读入 采集卡得到的的数据大部分可以以.txt文件列向量的形式得到，删除数据描述部分后，可以使用以下语句读入为列向量。 1[x,y]&#x3D;textread(&#39;Path&#39;,&#39; %f %f&#39;);  2.数据处理 之后可以通过不同的处理手段，对数据进行（不限于）以下的操作  数值处理 图像绘制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Matlab数据文件读&#x2F;写">
 <meta property="og:url" content="http://yoursite.com/posts/matlab/Matlabfile_IO.html">
 <meta property="og:site_name" content="Yushen&#39;s Note">
-<meta property="og:description" content="测试数据经常使用 matal 进行处理，在此保存一份读&#x2F;写文件模板方便以后使用  基本操作过程1.测试数据读入采集卡得到的的数据大部分可以以.txt文件列向量的形式得到，删除数据描述部分后，可以使用以下语句读入为列向量。 1[x,y]&#x3D;textread(&#39;Path&#39;,&#39; %f %f&#39;); 2.数据处理之后可以通过不同的处理手段，对数据进行（不限于）以下的操作  数值处理 图像绘制  3.数据导出">
+<meta property="og:description" content="测试数据经常使用 matal 进行处理，在此保存一份读&#x2F;写文件模板方便以后使用   基本操作过程  1.测试数据读入 采集卡得到的的数据大部分可以以.txt文件列向量的形式得到，删除数据描述部分后，可以使用以下语句读入为列向量。 1[x,y]&#x3D;textread(&#39;Path&#39;,&#39; %f %f&#39;);  2.数据处理 之后可以通过不同的处理手段，对数据进行（不限于）以下的操作  数值处理 图像绘制">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-18T06:40:17.000Z">
 <meta property="article:modified_time" content="2022-03-17T10:01:46.842Z">
@@ -431,17 +431,22 @@
         <blockquote>
 <p>测试数据经常使用 matal 进行处理，在此保存一份读/写文件模板方便以后使用</p>
 </blockquote>
-<h4 id="基本操作过程"><a href="#基本操作过程" class="headerlink" title="基本操作过程"></a>基本操作过程</h4><h5 id="1-测试数据读入"><a href="#1-测试数据读入" class="headerlink" title="1.测试数据读入"></a>1.测试数据读入</h5><p>采集卡得到的的数据大部分可以以<code>.txt</code>文件列向量的形式得到，删除数据描述部分后，可以使用以下语句读入为列向量。</p>
+<h4 id="基本操作过程"><a class="markdownIt-Anchor" href="#基本操作过程"></a> 基本操作过程</h4>
+<h5 id="1测试数据读入"><a class="markdownIt-Anchor" href="#1测试数据读入"></a> 1.测试数据读入</h5>
+<p>采集卡得到的的数据大部分可以以<code>.txt</code>文件列向量的形式得到，删除数据描述部分后，可以使用以下语句读入为列向量。</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x,y]=textread(<span class="string">'Path'</span>,<span class="string">' %f %f'</span>);</span><br></pre></td></tr></table></figure>
-<h5 id="2-数据处理"><a href="#2-数据处理" class="headerlink" title="2.数据处理"></a>2.数据处理</h5><p>之后可以通过不同的处理手段，对数据进行（不限于）以下的操作</p>
+<h5 id="2数据处理"><a class="markdownIt-Anchor" href="#2数据处理"></a> 2.数据处理</h5>
+<p>之后可以通过不同的处理手段，对数据进行（不限于）以下的操作</p>
 <ul>
 <li>数值处理</li>
 <li><a href="">图像绘制</a></li>
 </ul>
-<h5 id="3-数据导出"><a href="#3-数据导出" class="headerlink" title="3.数据导出"></a>3.数据导出</h5><p>处理完毕后可以将数据以<code>.txt</code>文件输出，给后续计算/处理使用</p>
+<h5 id="3数据导出"><a class="markdownIt-Anchor" href="#3数据导出"></a> 3.数据导出</h5>
+<p>处理完毕后可以将数据以<code>.txt</code>文件输出，给后续计算/处理使用</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%写入文件路径</span></span><br><span class="line">fid=fopen(<span class="string">'D:\Project\Graduation Design\Matlab\MiX_Z_L.txt'</span>,<span class="string">'wt'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:<span class="number">1</span>:<span class="number">1000</span></span><br><span class="line">    fprintf(fid,<span class="string">'%d '</span>,f(<span class="built_in">i</span>));</span><br><span class="line">    fprintf(fid,<span class="string">'&#123;%f %f&#125;\n'</span>,arr1(<span class="built_in">i</span>),arr2(<span class="built_in">i</span>));</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">fclose(fid);</span><br></pre></td></tr></table></figure>
-<hr>
-<h4 id="多文件处理模板"><a href="#多文件处理模板" class="headerlink" title="多文件处理模板"></a>多文件处理模板</h4><p>这里以某次处理振动加速的得到速度的过程作为案例；</p>
+<hr />
+<h4 id="多文件处理模板"><a class="markdownIt-Anchor" href="#多文件处理模板"></a> 多文件处理模板</h4>
+<p>这里以某次处理振动加速的得到速度的过程作为案例；</p>
 <ul>
 <li>数据文件采用统一命名规则，可以方便利用循环语句快速导入数据</li>
 </ul>
