@@ -25,15 +25,15 @@
 <meta property="og:site_name" content="Yushen&#39;s Note">
 <meta property="og:description" content="matlab中有函数xcorr可完成相关性分析，本文为加深理解，采用快速傅里叶变换进行了一次实现。   自相关分析实现  分析原理 工程上对信号相似程度的研究,可以使用以下公式进行分析。 Rxy(τ)&#x3D;∫−∞+∞x(t)y(t+τ)dxR_{xy}(\tau)&#x3D;\int^{+\infty}_{-\infty}{ x(t)y(t+\tau)}dx Rxy​(τ)&#x3D;∫−∞+∞​x(t)y(t+τ)d">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/correlation_analysis_1.png">
-<meta property="og:image" content="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/correlation_analysis_2.png">
+<meta property="og:image" content="https://yushen-blog.oss-cn-guangzhou.aliyuncs.com/img/correlation_analysis_1.png">
+<meta property="og:image" content="https://yushen-blog.oss-cn-guangzhou.aliyuncs.com/img/correlation_analysis_2.png">
 <meta property="article:published_time" content="2020-11-06T08:30:20.000Z">
-<meta property="article:modified_time" content="2022-03-25T07:38:08.663Z">
+<meta property="article:modified_time" content="2022-03-29T07:08:36.266Z">
 <meta property="article:author" content="Yushen_L">
 <meta property="article:tag" content="信号处理">
 <meta property="article:tag" content="Matlab">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/correlation_analysis_1.png">
+<meta name="twitter:image" content="https://yushen-blog.oss-cn-guangzhou.aliyuncs.com/img/correlation_analysis_1.png">
   <!-- Canonical links -->
   <link rel="canonical" href="http://yoursite.com/posts/DSP/correlation_analysis_1.html">
   
@@ -69,7 +69,7 @@
       
       <div class="profile-block text-center">
         <a id="avatar" href="/introduction/" target="_blank">
-          <img class="img-circle img-rotate" src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/logo-avator.jpg" width="200" height="200">
+          <img class="img-circle img-rotate" src="https://yushen-blog.oss-cn-guangzhou.aliyuncs.com/img/logo-avator.jpg" width="200" height="200">
         </a>
         <h2 id="name" class="hidden-xs hidden-sm">Liu_Yushen</h2>
         <h3 id="title" class="hidden-xs hidden-sm hidden-md">Engineer</h3>
@@ -118,16 +118,6 @@
             <i class="icon icon-home-fill"></i>
             
             <span class="menu-title">首页</span>
-          </a>
-        </li>
-        
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives">
-            
-            <i class="icon icon-archives-fill"></i>
-            
-            <span class="menu-title">归档</span>
           </a>
         </li>
         
@@ -457,10 +447,10 @@ R_{xy}(k) &amp;= X(k)\overline{Y}(k)           \\
 <h4 id="实现效果"><a class="markdownIt-Anchor" href="#实现效果"></a> 实现效果</h4>
 <p>自相关分析效果</p>
 <div align=center>
-    <img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/correlation_analysis_1.png" width = "500" height = "300" /></div>
+    <img src="https://yushen-blog.oss-cn-guangzhou.aliyuncs.com/img/correlation_analysis_1.png" width = "500" height = "300" /></div>
 <p>互相关效果</p>
 <div align = center>
-<img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/correlation_analysis_2.png" width = "500" height = "300" />
+<img src="https://yushen-blog.oss-cn-guangzhou.aliyuncs.com/img/correlation_analysis_2.png" width = "500" height = "300" />
 </div>
 
       
@@ -481,7 +471,7 @@ R_{xy}(k) &amp;= X(k)\overline{Y}(k)           \\
     <figure class="media">
       <div class="media-left">
         <a href="/introduction/" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="https://gitee.com/Liu-Yushen/blog_image/raw/master/img/logo-avator.jpg" class="img-rounded w-full" alt="">
+          <img src="https://yushen-blog.oss-cn-guangzhou.aliyuncs.com/img/logo-avator.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
       <div class="media-body">
